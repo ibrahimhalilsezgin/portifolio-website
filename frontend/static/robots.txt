@@ -1,3 +1,11 @@
-# allow crawling everything by default
 User-agent: *
-Disallow:
+Allow: /
+
+# Site haritası (varsa)
+Sitemap: https://ibo.rocks/sitemap.xml
+
+# Gizli veya özel yolları engelle
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /login
