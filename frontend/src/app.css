@@ -3,7 +3,15 @@
 @theme {
     --color-hit: #FF790F
 }
-
+@theme {
+    --color-adminbg: #101622
+}   
+@theme {
+    --color-adminbg-2: #19212E
+}
+@theme {
+    --color-adminbg-3: #2C3E50
+}
 body {
     scroll-behavior: smooth;
 }

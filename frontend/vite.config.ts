@@ -5,6 +5,6 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
 	server:{
-		allowedHosts:['ibo.rocks']
+		allowedHosts:['ibo.rocks', "12a.ibo.rocks"]
 	}
 });

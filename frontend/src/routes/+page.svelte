@@ -1,17 +1,31 @@
 <script lang="ts">
   import CircleProgressBar from "$lib/Components/CircleProgressBar.svelte";
   import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
+  import { fade, slide } from "svelte/transition";
   import { Diamonds } from "svelte-loading-spinners";
   import profilePhoto from "$lib/assets/adam.png" 
   let loading = false;
 
+  let selectedImage = "";
   onMount(() => {
     setTimeout(() => {
       loading = false;
     },2000)
   });
 </script>
+
+
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+{#if selectedImage}
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <div class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedImage = ""}>
+    <div class="bg-black z-50">
+        <img src="{selectedImage}" alt="" class="w-300 z-50">
+        <div class="items-center flex justify-center text-2xl">
+        </div>
+    </div>
+  </div>
+{/if}
 
 {#if !loading}
   <div class="flex " transition:fade>
@@ -20,22 +34,22 @@
         class="absolute ml-24 md:w-[400px] md:h-[400px] bg-hit rounded-full blur-[150px] opacity-15 -z-10"
       ></div>
       <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>
-      <div class="pt-3 text-xl md:text-3xl">İbrahim Halil Sezgin</div>
+      <h1 class="pt-3 text-xl md:text-3xl">İbrahim Halil Sezgin</h1>
       <div class="text-hit text-2xl md:text-6xl">Full-Stack Developer</div>
 
       <div class="pt-8 flex gap-4 text-white/60">
         <a href="https://instagram.com/ibrhmhl" aria-label="links"
-          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer"
+          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
         >
           <i class="fab fa-instagram text-2xl md:text-3xl"></i>
       </a>
         <a href="https://www.linkedin.com/in/ibrahimhalilsezgin/" aria-label="links"
-          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer"
+          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
         >
           <i class="fab fa-linkedin text-2xl md:text-3xl"></i>
       </a>
         <a href="https://github.com/ibrahimhalilsezgin" aria-label="links"
-          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer"
+          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
         >
           <i class="fab fa-github text-2xl md:text-3xl"></i>
       </a>
@@ -91,9 +105,9 @@
         <i class="fa fa-user-group text-hit text-6xl pt-6"></i>
         <div class="text-hit text-2xl font-semibold pt-3">Full-Stack Web Geliştirme</div>
         <div class="text-white/50 pt-5 p-5">
-    Bir Full-Stack Developer olarak, kullanıcı dostu arayüzlerden sağlam ve ölçeklenebilir Backend sistemlerine kadar projelerin tüm aşamalarında çözüm üretmekteyim.
-    Özellikle Svelte, Node.js ve MongoDB gibi modern teknolojileri kullanarak inovatif dijital çözümler tasarlıyor ve hayata geçiriyorum.
-    Amacım, sadece çalışan değil, aynı zamanda mükemmel bir kullanıcı deneyimi sunan ürünler ortaya koymaktır. Karmaşık sorunları çözmek ve her projeye değer katmak benim için önceliktir.
+          Bir Full-Stack Developer olarak, kullanıcı dostu arayüzlerden sağlam ve ölçeklenebilir Backend sistemlerine kadar projelerin tüm aşamalarında çözüm üretmekteyim.
+          Özellikle Svelte, Node.js ve MongoDB gibi modern teknolojileri kullanarak inovatif dijital çözümler tasarlıyor ve hayata geçiriyorum.
+          Amacım, sadece çalışan değil, aynı zamanda mükemmel bir kullanıcı deneyimi sunan ürünler ortaya koymaktır. Karmaşık sorunları çözmek ve her projeye değer katmak benim için önceliktir.
         </div>
       </div>
       <div class="rounded-lg w-100 text-center h-70 bg-[#1b1b1b]">
@@ -179,13 +193,19 @@
       <div class="bg-[#1b1b1b] p-4 md:text-lg rounded-lg mt-3">Websites</div>
     </div>
     <div class="grid md:grid-cols-3 mt-15 gap-6 p-15">
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer " on:click={() => selectedImage = "1.png"}>
         <img src="1.png" alt="">
         <div class="text-center text-white/60 text-lg pt-2 font-semibold">
           NodeShop
         </div>
       </div>
-      
+      <div class="grid md:grid-cols-3 mt-15 gap-6 p-15">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer " on:click={() => selectedImage = "2.png"} >
+        <img src="2.png" alt="">
+        <div class="text-center text-white/60 text-lg pt-2 font-semibold">
+          EminTeknikTesisat.com
+        </div>
+      </div>
     
     </div>
   </div>
@@ -195,49 +215,49 @@
       Sertifikalarım
     </div>
     <div class="grid md:grid-cols-3 gap-6 p-15">
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s1.jpg"}}>
         <img src="s1.jpg" alt="">
         <div class="text-center text-white/60 text-lg pt-2 font-semibold">
           DoS / DDos Saldırıları ve Koruma
         </div>
       </div>
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s2.jpg"}}>
         <img src="s2.jpg" alt="">
         <div class="text-center text-white/60 text-lg pt-2 font-semibold">
           HTML5 ile Web Geliştirme
         </div>
       </div>
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s3.jpg"}}>
         <img src="s3.jpg" alt="">
         <div class="text-center text-white/60 text-lg pt-2 font-semibold">
           Node.js ile Web Programlama
         </div>
       </div>
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s4.jpg"}}>
         <img src="s4.jpg" alt="">
         <div class="text-center text-white/60 text-lg  font-semibold">
           Siber Güvenliğe Giriş
         </div>
       </div>
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s5.jpg"}}>
         <img src="s5.jpg" alt="">
         <div class="text-center text-white/60 text-lg font-semibold">
           Web Sitesi Kullanılabilirliği
         </div>
       </div>
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s6.jpg"}}>
         <img src="s6.jpg" alt="">
         <div class="text-center text-white/60 text-lg  font-semibold">
           Javascript (Basic)
         </div>
       </div>
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s7.jpg"}}>
         <img src="s7.jpg" alt="">
         <div class="text-center text-white/60 text-lg  font-semibold">
           Javascript (Intermediate)
         </div>
       </div>
-      <div class="bg-[#252525]  h-min rounded-lg">
+      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s8.jpg"}}>
         <img src="s8.jpg" alt="">
         <div class="text-center text-white/60 text-lg  font-semibold">
           Python (Basic)
@@ -272,3 +292,4 @@
     <Diamonds />
   </div>
 {/if}
+

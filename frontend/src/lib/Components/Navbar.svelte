@@ -34,7 +34,7 @@
 
 </script>
 
-<div class="p-12 flex">
+<div class="p-11 flex">
     <div class="w-1/3 text-2xl md:text-3xl text-hit text-nowrap">
         İbrahim Halil Sezgin
     </div>
@@ -55,10 +55,10 @@
     </div>
 </div>
 <div class="bg-[#1b1b1b] text-center hidden" bind:this={menuDiv}>
-        <div class="flex-col flex justify-center text-xl text-white/70 gap-4">
-            <div class="text-hit border border-white/25 rounded-lg p-4">Home</div>
-            <div class="border border-white/25 rounded-lg p-4">Services</div>
-            <div class="border border-white/25 rounded-lg p-4">About me</div>
-            <div class="border border-white/25 rounded-lg p-4">Contact Me</div>
-        </div>
+    <div class="flex-col flex justify-center text-xl text-white/70 gap-4">
+        <div class="text-hit border border-white/25 rounded-lg p-4">Home</div>
+        <div class="border border-white/25 rounded-lg p-4">Services</div>
+        <div class="border border-white/25 rounded-lg p-4">About me</div>
+        <div class="border border-white/25 rounded-lg p-4">Contact Me</div>
+    </div>
 </div>

@@ -23,6 +23,11 @@
 		"vite": "^7.1.10"
 	},
 	"dependencies": {
+		"@types/jsonwebtoken": "^9.0.10",
+		"axios": "^1.13.2",
+		"jsonwebtoken": "^9.0.2",
+		"lucide": "^0.553.0",
+		"lucide-svelte": "^0.553.0",
 		"svelte-loading-spinners": "^0.3.6"
 	}
 }
