@@ -199,16 +199,13 @@
           NodeShop
         </div>
       </div>
-      <div class="grid md:grid-cols-3 mt-15 gap-6 p-15">
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer " on:click={() => selectedImage = "2.png"} >
-        <img src="2.png" alt="">
+      <div class="bg-[#252525] h-min rounded-lg cursor-pointer " on:click={() => selectedImage = "2.png"} >
+        <img src="2.png"  class="h-80" alt="">
         <div class="text-center text-white/60 text-lg pt-2 font-semibold">
           EminTeknikTesisat.com
         </div>
       </div>
       </div>
-    
-    </div>
   </div>
   <div class="justify-center items-center flex flex-col mt-20">
 
