@@ -33,24 +33,4 @@ export default {
         }
 
     },
-    async newSkill(title:string, proficiency:number) {
-        if(!title || !proficiency) {
-            throw new Error('Tüm Boşluklar Doldurulmalıdır.');
-        };
-
-        const newSkill = await new Skills({
-            title,
-            proficiency
-        }).save();
-        return {
-            id: newSkill.id,
-            title: newSkill.title,
-            proficiency: newSkill.proficiency
-        }
-    },
-    async getSkills() {
-        const skills = await Skills.find({});
-
-        return skills;
-    }
 }

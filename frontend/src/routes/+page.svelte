@@ -4,9 +4,15 @@
   import { fade, slide } from "svelte/transition";
   import { Diamonds } from "svelte-loading-spinners";
   import profilePhoto from "$lib/assets/adam.png" 
+  import { goto } from "$app/navigation";
+  import Particles from "$lib/Components/Particles.svelte";
+  import BlurFade from "$lib/Components/BlurFade.svelte";
+  
+  export let data;
   let loading = false;
 
-  let selectedImage = "";
+  let selectedProject = "";
+  let selectedCertificate = "";
   onMount(() => {
     setTimeout(() => {
       loading = false;
@@ -15,27 +21,40 @@
 </script>
 
 
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-{#if selectedImage}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <div class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedImage = ""}>
-    <div class="bg-black z-50">
-        <img src="{selectedImage}" alt="" class="w-300 z-50">
+{#if selectedProject}
+  
+  <div class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedProject = ""}>
+    <div class=" z-50">
+        <img src="{selectedProject}" alt="" class="w-300 z-50 aspect-video">
         <div class="items-center flex justify-center text-2xl">
         </div>
     </div>
   </div>
 {/if}
-
+{#if selectedCertificate}
+  
+  <div class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedCertificate = ""}>
+    <div class=" z-50">
+        <img src="{selectedCertificate}" alt="" class="w-300 z-50">
+        <div class="items-center flex justify-center text-2xl">
+        </div>
+    </div>
+  </div>
+{/if}
 {#if !loading}
-  <div class="flex " transition:fade>
-    <div class="m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex">
-      <div
-        class="absolute ml-24 md:w-[400px] md:h-[400px] bg-hit rounded-full blur-[150px] opacity-15 -z-10"
-      ></div>
-      <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>
-      <h1 class="pt-3 text-xl md:text-3xl">İbrahim Halil Sezgin</h1>
-      <div class="text-hit text-2xl md:text-6xl">Full-Stack Developer</div>
+<div class="absolute w-full h-full">
+  <Particles />
+</div>
+<div class="flex " transition:fade>
+  
+  <div class="m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex">
+    <BlurFade delay={0.25} >
+        <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>
+        <h1 class="pt-3 text-xl md:text-3xl">İbrahim Halil Sezgin</h1>
+        <BlurFade delay={0.25 * 2} >
+        <div class="text-hit text-2xl md:text-6xl">Full-Stack Developer</div>
+        </BlurFade>
+      </BlurFade>
 
       <div class="pt-8 flex gap-4 text-white/60">
         <a href="https://instagram.com/ibrhmhl" aria-label="links"
@@ -57,12 +76,10 @@
       </div>
       <div class="flex gap-7 pt-8">
         <button
-          class="border h-12 w-38 bg-hit border-hit rounded-lg font-semibold cursor-pointer"
+          class="border h-12 w-38 bg-hit border-hit rounded-lg font-semibold cursor-pointer" on:click={() => window.location.assign('www.linkedin.com/in/ibrahimhalilsezgin')}
           >İşe Al
         </button>
-        <button class="border h-12 w-40 rounded-lg cursor-pointer"
-          >CV'mi İndir</button
-        >
+        <button class="border h-12 w-40 rounded-lg cursor-pointer" on:click={() => goto('/cv.pdf')}>CV'mi İndir</button>
       </div>
 
       <div
@@ -151,34 +168,14 @@
       Download CV
     </div>
 
-    <div class="mt-10 md:flex gap-10 grid grid-cols-2">
-      <div class="text-center md:text-3xl">
-        <CircleProgressBar value=99/>
-        <div>NodeJS</div>
-      </div>
-      <div class="text-center md:text-3xl">
-        <CircleProgressBar value=99/>
-        <div>Javascript</div>
-      </div>
-      <div class="text-center md:text-3xl">
-        <CircleProgressBar value=60/>
-        <div>Svelte</div>
-      </div>
-      <div class="text-center md:text-3xl">
-        <CircleProgressBar value=70/>
-        <div>Html</div>
-      </div>
-      <div class="text-center md:text-3xl">
-        <CircleProgressBar value=70/>
-        <div>Css</div>
-      </div>
-      <div class="text-center md:text-3xl">
-        <CircleProgressBar value=30/>
-        <div>C#</div>
-      </div>
-      <div class="text-center md:text-3xl">
-        <CircleProgressBar value=10/>
-        <div>.NET MVC</div>
+    <div class="mt-10 md:flex gap-10">
+      <div class="md:grid md:grid-cols-8 gap-12 place-content-center">
+        {#each data.api.skills as skill} 
+          <div class="text-center md:text-3xl">
+            <CircleProgressBar value={skill.proficiency}/>
+            <div>{skill.title}</div>
+          </div>
+        {/each}
       </div>
     </div>
   </div>
@@ -188,23 +185,18 @@
     <div class="text-3xl md:text-4xl">
       Portfolio
     </div>
-    <div class="md:flex grid grid-cols-2 gap-4 md:gap-10 mt-8">
-      <div class="bg-hit p-4 md:text-lg rounded-lg mt-3">All</div>
-      <div class="bg-[#1b1b1b] p-4 md:text-lg rounded-lg mt-3">Websites</div>
-    </div>
+
     <div class="grid md:grid-cols-3 mt-15 gap-6 p-15">
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer " on:click={() => selectedImage = "1.png"}>
-        <img src="1.png" alt="">
-        <div class="text-center text-white/60 text-lg pt-2 font-semibold">
-          NodeShop
+      
+      {#each data.api.projects as project}
+        <div class="bg-[#252525]  h-min rounded-xl cursor-pointer " on:click={() => selectedProject = `http://localhost:3000/projects/${project.title}.jpeg`}>
+          <img src={`http://localhost:3000/projects/${project.title}.jpeg`} class="w-full max-h-69 aspect-video rounded-t-2xl" alt="">
+          <div class="text-center text-white/60 text-lg pt-2 font-semibold">
+            {project.title}
+          </div>
         </div>
-      </div>
-      <div class="bg-[#252525] h-min rounded-lg cursor-pointer " on:click={() => selectedImage = "2.png"} >
-        <img src="2.png"  class="h-80" alt="">
-        <div class="text-center text-white/60 text-lg pt-2 font-semibold">
-          EminTeknikTesisat.com
-        </div>
-      </div>
+      {/each}
+      
       </div>
   </div>
   <div class="justify-center items-center flex flex-col mt-20">
@@ -213,56 +205,16 @@
       Sertifikalarım
     </div>
     <div class="grid md:grid-cols-3 gap-6 p-15">
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s1.jpg"}}>
-        <img src="s1.jpg" alt="">
-        <div class="text-center text-white/60 text-lg pt-2 font-semibold">
-          DoS / DDos Saldırıları ve Koruma
-        </div>
-      </div>
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s2.jpg"}}>
-        <img src="s2.jpg" alt="">
-        <div class="text-center text-white/60 text-lg pt-2 font-semibold">
-          HTML5 ile Web Geliştirme
-        </div>
-      </div>
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s3.jpg"}}>
-        <img src="s3.jpg" alt="">
-        <div class="text-center text-white/60 text-lg pt-2 font-semibold">
-          Node.js ile Web Programlama
-        </div>
-      </div>
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s4.jpg"}}>
-        <img src="s4.jpg" alt="">
-        <div class="text-center text-white/60 text-lg  font-semibold">
-          Siber Güvenliğe Giriş
-        </div>
-      </div>
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s5.jpg"}}>
-        <img src="s5.jpg" alt="">
-        <div class="text-center text-white/60 text-lg font-semibold">
-          Web Sitesi Kullanılabilirliği
-        </div>
-      </div>
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s6.jpg"}}>
-        <img src="s6.jpg" alt="">
-        <div class="text-center text-white/60 text-lg  font-semibold">
-          Javascript (Basic)
-        </div>
-      </div>
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s7.jpg"}}>
-        <img src="s7.jpg" alt="">
-        <div class="text-center text-white/60 text-lg  font-semibold">
-          Javascript (Intermediate)
-        </div>
-      </div>
-      <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedImage = "s8.jpg"}}>
-        <img src="s8.jpg" alt="">
-        <div class="text-center text-white/60 text-lg  font-semibold">
-          Python (Basic)
-        </div>
-      </div>
       
-    
+      {#each data.api.certificates as certification}
+        <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedCertificate = `http://localhost:3000/certificates/${certification.title}.jpeg`}}>
+          <img src={`http://localhost:3000/certificates/${certification.title}.jpeg`} class="w-full rounded-t-2xl" alt="">
+          <div class="text-center text-white/60 text-lg pt-2 font-semibold">
+            {certification.title}
+          </div>
+        </div>
+      {/each}
+           
     </div>
   </div>
   <div class="flex text-center flex-col items-center justify-center pt-16 mb-20" id="contact">

@@ -1,4 +1,5 @@
 
+
 import { Schema, model } from "mongoose";
 
 
@@ -10,13 +11,10 @@ const schema = new Schema({
     title:{
         type:String
     },
-    description:{
-        type:String,
-    },
     createdAt:{
         type:Date,
         default: new Date()
     }
 });
 
-export default model('project', schema);
+export default model('certificates', schema);

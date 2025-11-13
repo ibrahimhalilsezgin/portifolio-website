@@ -15,7 +15,7 @@
     async function submit() {
         try {
             const response = await axios({
-                url:'http://localhost:3000/settings/updatesettings',
+                url:'http://localhost:3000/skills/updatesettings',
                 headers:{
                     Authorization: 'Bearer ' + getCookie('token')
                 },

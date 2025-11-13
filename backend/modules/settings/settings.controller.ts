@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import settingsService from "./settings.service";
-import Skills from "../../db/models/Skills";
 class settingsController {
     async postUpdateSettings(req:Request, res:Response) {
         const {username, newpassword, currentpassword} = req.body;
@@ -14,25 +13,7 @@ class settingsController {
         } catch (err:any) {
             res.status(400).json({ message: err.message });
         }
-    };
-    async postCreateSkill(req:Request, res:Response) {
-        const {title, proficiency} = req.body;
-
-        try {
-            const result = await settingsService.newSkill(title, proficiency);
-            res.json(result);
-        } catch(err:any) {
-            res.status(400).send({ message: err.message });
-        } 
-    };
-    async getSkills(req:Request, res:Response) {
-        try {
-            const result = await settingsService.getSkills();
-            res.json(result)
-        } catch (error:any) {
-            res.status(400).json({ message: error });
-        };
-    };
+    };   
 };
 
 

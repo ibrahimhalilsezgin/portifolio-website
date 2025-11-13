@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Palette, Code, User, Inbox, Settings, Bell, LogOut, CirclePlus, Search, LayoutDashboard } from "lucide-svelte"
+    import { Palette, Code, User, Inbox, Settings, Bell, LogOut, CirclePlus, Search, LayoutDashboard, File } from "lucide-svelte"
     import { setCookie } from "../../utils/cookie.util.js";
     import { redirect } from "@sveltejs/kit";
   import { goto } from "$app/navigation";
@@ -12,30 +12,46 @@
         <div class="text-center text-3xl">
             Admin Panel
         </div>
+        
+        
+        
         <div class="w-full mt-10 h-3/4 flex flex-col gap-4">
             <div class="bg-[#2E5979] text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer ">
                 <LayoutDashboard size={27} />
                 Dashboard
             </div>
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" >
-                <Palette size={27} />
-                Projects
-            </div>
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer " onclick={() => goto('/admin/skills')}>
+            
+            
+            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/skills')}>
                 <Code size={27} />
                 Skills
             </div>
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer ">
+            
+            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/projects')}>
+                <Palette size={27} />
+                Projects
+            </div>
+            
+            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/certificates')}>
+                <File size={27} />
+                Certificates
+            </div>
+            
+            
+            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/aboutme')}>
                 <User size={27} />
                 About Me
             </div>
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer ">
+            
+            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/contact')}>
                 <Inbox size={27} />
                 Contact Inquiries
             </div>
         </div>
         <hr class="text-black">
         <div class="w-full pt-4 flex flex-col gap-4 pl-4">
+            
+            
             <div class="text-lg flex items-center rounded-lg p-2 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/settings')}>
                 <Settings size={35}/>
                 Settings
