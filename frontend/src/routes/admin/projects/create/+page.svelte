@@ -4,6 +4,7 @@
   import { getCookie } from "../../../../utils/cookie.util";
   import { slide } from "svelte/transition";
   import { goto } from "$app/navigation";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
 
     let formData = {
         title:'',
@@ -14,7 +15,7 @@
     async function submit() {
         const response = await axios({
             method:'post',
-            url:'http://localhost:3000/projects/createproject',
+            url:PUBLIC_BACKEND_URL+'/projects/createproject',
             headers:{
                 Authorization: 'Bearer ' + getCookie('token')
             },
@@ -30,7 +31,7 @@
             imageFormData.append('title', formData.title)
             await axios({
                 method:'post',
-                url:'http://localhost:3000/projects/upload',
+                url:PUBLIC_BACKEND_URL + '/projects/upload',
                 headers:{
                     Authorization: 'Bearer ' + getCookie('token')
                 },

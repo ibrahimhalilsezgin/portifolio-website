@@ -7,6 +7,7 @@
     import { cubicOut } from "svelte/easing";
   import { goto } from "$app/navigation";
   import LinkImageHover from "$lib/Components/LinkImageHover.svelte";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
 
 
 
@@ -14,7 +15,7 @@
     async function getCertificates() {
         const response = await axios({
             method:'GET',
-            url:'http://localhost:3000/api/certificates',
+            url:PUBLIC_BACKEND_URL + '/api/certificates',
             headers:{
                 Authorization: 'Bearer ' + getCookie('token')
             }
@@ -28,7 +29,7 @@
     async function deleteCertificate(id:string) {
         const response = await axios({
             method:'POST',
-            url:'http://localhost:3000/certificates/deletecertificate',
+            url:PUBLIC_BACKEND_URL + '/certificates/deletecertificate',
             data:{
                 id: id
             },
@@ -84,7 +85,7 @@
                 
                 {#each certificates as certification}
                     <div class="flex w-full pb-5 border-t z-40 border-t-adminbg-3 p-4" transition:slide={{axis:"y",easing:cubicOut}}>
-                        <LinkImageHover cl="w-1/3" hrefDetails={{text: certification.title, href:"#",imgAlt: certification.title, imgSrc:`http://localhost:3000/certificates/${certification.title}.jpeg`}} />
+                        <LinkImageHover cl="w-1/3" hrefDetails={{text: certification.title, href:"#",imgAlt: certification.title, imgSrc: PUBLIC_BACKEND_URL +`/certificates/${certification.title}.jpeg`}} />
                         <div class="flex items-center gap-4">
                             <button class="cursor-pointer hover:text-red-500" on:click={() => deleteCertificate(certification.id)}>
                                 <Trash2 size={32}/>

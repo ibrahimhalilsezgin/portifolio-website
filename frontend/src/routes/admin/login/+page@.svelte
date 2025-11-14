@@ -2,6 +2,7 @@
   import { goto } from "$app/navigation";
     import axios from "axios";
   import { setCookie } from "../../../utils/cookie.util";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
     let formData = {
         username:'',
         password:''
@@ -12,7 +13,7 @@
         try {
             const response = await axios({
                 method:'post',
-                url:'http://localhost:3000/auth/login',
+                url:PUBLIC_BACKEND_URL+'/auth/login',
                 data: {
                     username: formData.username,
                     password: formData.password

@@ -5,13 +5,14 @@
     import { Pencil, Plus, Search, Trash2, X } from "lucide-svelte";
     import { onMount } from "svelte";
     import { cubicOut } from "svelte/easing";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
 
 
     let skills:any = [];
     async function getSkills() {
         const response = await axios({
             method:'GET',
-            url:'http://localhost:3000/api/skills',
+            url:PUBLIC_BACKEND_URL+'/api/skills',
             headers:{
                 Authorization: 'Bearer ' + getCookie('token')
             }
@@ -38,7 +39,7 @@
             if(newSkillformData.proficiency > 100) newSkillformData.proficiency = 100;
             if(newSkillformData.proficiency < 0) newSkillformData.proficiency = 1;
             const response = await axios({
-                url:'http://localhost:3000/skills/createskill',
+                url:PUBLIC_BACKEND_URL+'/skills/createskill',
                 headers:{
                     Authorization: 'Bearer ' + getCookie('token')
                 },
@@ -65,7 +66,7 @@
     async function deleteSkill(title:string) {
         try {
             const response = await axios({
-                url:'http://localhost:3000/skills/deleteskill',
+                url:PUBLIC_BACKEND_URL+'/skills/deleteskill',
                 headers:{
                     Authorization: 'Bearer ' + getCookie('token')
                 },

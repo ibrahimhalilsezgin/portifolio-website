@@ -7,6 +7,7 @@
     import { cubicOut } from "svelte/easing";
   import { goto } from "$app/navigation";
   import LinkImageHover from "$lib/Components/LinkImageHover.svelte";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
 
 
 
@@ -14,7 +15,7 @@
     async function getProjects() {
         const response = await axios({
             method:'GET',
-            url:'http://localhost:3000/api/projects',
+            url:PUBLIC_BACKEND_URL+'/api/projects',
             headers:{
                 Authorization: 'Bearer ' + getCookie('token')
             }
@@ -28,7 +29,7 @@
     async function deleteProject(id:string) {
         const response = await axios({
             method:'POST',
-            url:'http://localhost:3000/projects/deleteproject',
+            url:PUBLIC_BACKEND_URL + '/projects/deleteproject',
             data:{
                 id: id
             },
@@ -84,7 +85,7 @@
                 
                 {#each projects as Project}
                     <div class="flex w-full pb-5 border-t z-40 border-t-adminbg-3 p-4" transition:slide={{axis:"y",easing:cubicOut}}>
-                        <LinkImageHover cl="w-1/3" hrefDetails={{text: Project.title, href:"#",imgAlt: Project.description, imgSrc:`http://localhost:3000/projects/${Project.title}.jpeg`}} />
+                        <LinkImageHover cl="w-1/3" hrefDetails={{text: Project.title, href:"#",imgAlt: Project.description, imgSrc:`${PUBLIC_BACKEND_URL}/projects/${Project.title}.jpeg`}} />
                         <div class="w-full">
                             <div class="bg-green-400/30 w-min min-w-24 flex items-center text-nowrap p-2 justify-center text-green-300 rounded-lg">
                                 {Project.description}

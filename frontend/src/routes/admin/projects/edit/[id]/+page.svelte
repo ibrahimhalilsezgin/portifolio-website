@@ -4,6 +4,7 @@
     import { getCookie } from "../../../../../utils/cookie.util";
     import { slide } from "svelte/transition";
     import { goto } from "$app/navigation";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
 
     export let data;
 
@@ -15,7 +16,7 @@
     async function submit() {
         const response = await axios({
             method:'post',
-            url:'http://localhost:3000/projects/updateproject',
+            url:PUBLIC_BACKEND_URL + '/projects/updateproject',
             headers:{
                 Authorization: 'Bearer ' + getCookie('token')
             },

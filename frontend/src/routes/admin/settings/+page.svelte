@@ -2,6 +2,7 @@
     import axios, { type AxiosResponse } from "axios";
   import { getCookie, setCookie } from "../../../utils/cookie.util.js";
   import { fade } from "svelte/transition";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
     export let data
 
     let formData = {
@@ -15,7 +16,7 @@
     async function submit() {
         try {
             const response = await axios({
-                url:'http://localhost:3000/skills/updatesettings',
+                url:PUBLIC_BACKEND_URL + '/skills/updatesettings',
                 headers:{
                     Authorization: 'Bearer ' + getCookie('token')
                 },

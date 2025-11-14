@@ -229,8 +229,8 @@
     <div class="grid md:grid-cols-3 mt-15 gap-6 p-15">
       
       {#each data.api.projects as project}
-        <div class="bg-[#252525]  h-min rounded-xl cursor-pointer " on:click={() => selectedProject = `http://localhost:3000/projects/${project.title}.jpeg`}>
-          <img src={`http://localhost:3000/projects/${project.title}.jpeg`} class="w-full max-h-69 aspect-video rounded-t-2xl" alt="">
+        <div class="bg-[#252525]  h-min rounded-xl cursor-pointer " on:click={() => selectedProject = `${PUBLIC_BACKEND_URL}/projects/${project.title}.jpeg`}>
+          <img src={`${PUBLIC_BACKEND_URL}/projects/${project.title}.jpeg`} class="w-full max-h-69 aspect-video rounded-t-2xl" alt="">
           <div class="text-center text-white/60 text-lg pt-2 font-semibold">
             {project.title}
           </div>
@@ -247,8 +247,8 @@
     <div class="grid md:grid-cols-3 gap-6 p-15">
       
       {#each data.api.certificates as certification}
-        <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedCertificate = `http://localhost:3000/certificates/${certification.title}.jpeg`}}>
-          <img src={`http://localhost:3000/certificates/${certification.title}.jpeg`} class="w-full rounded-t-2xl" alt="">
+        <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedCertificate = `${PUBLIC_BACKEND_URL}/certificates/${certification.title}.jpeg`}}>
+          <img src={`${PUBLIC_BACKEND_URL}/certificates/${certification.title}.jpeg`} class="w-full rounded-t-2xl" alt="">
           <div class="text-center text-white/60 text-lg pt-2 font-semibold">
             {certification.title}
           </div>

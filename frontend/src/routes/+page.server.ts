@@ -1,10 +1,11 @@
+import { PUBLIC_BACKEND_URL } from '$env/static/public';
 import { redirect } from '@sveltejs/kit';
 import axios from "axios";
 export const load = async ({ locals, cookies }) => {
     try {
         const response = await axios({
             method:'GET',
-            url:'http://localhost:3000/api/AllInfo',
+            url:PUBLIC_BACKEND_URL + '/api/AllInfo',
             headers:{
                 Authorization: 'Bearer ' + cookies.get('token')
             }
