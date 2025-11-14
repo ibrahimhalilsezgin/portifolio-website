@@ -3,7 +3,6 @@
   import { onMount } from "svelte";
   import { fade, slide } from "svelte/transition";
   import { Diamonds } from "svelte-loading-spinners";
-  import profilePhoto from "$lib/assets/adam.png" 
   import { goto } from "$app/navigation";
   import Particles from "$lib/Components/Particles.svelte";
   import BlurFade from "$lib/Components/BlurFade.svelte";
@@ -62,98 +61,90 @@
 <div class="absolute w-full -z-10">
   <Particles />
 </div>
-<div class="flex " transition:fade>
+<div class="flex pl-12" transition:fade>
   
-  <div class="m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex">
-    <BlurFade delay={0.25} >
+  <BlurFade delay={0.25} >
+  <div class="m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex ">
         <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>
         <h1 class="pt-3 text-xl md:text-3xl">{data.api.about.name}</h1>
         <BlurFade delay={0.25 * 2} >
-        <div class="text-hit text-2xl md:text-6xl">{data.api.about.role}</div>
+        <div class="text-hit text-2xl md:text-6xl md:text-nowrap">{data.api.about.role}</div>
         </BlurFade>
-      </BlurFade>
-
-      <div class="pt-8 flex gap-4 text-white/60 z-20">
-        {#if data.api.about.github}
+        
+        <div class="pt-8 flex gap-4 text-white/60 z-20">
+          {#if data.api.about.github}
           <a href={data.api.about.github} aria-label="links"
-            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
           >
-            <i class="fab fa-github text-2xl md:text-3xl"></i>
-          </a>
+          <i class="fab fa-github text-2xl md:text-3xl"></i>
+        </a>
         {/if}
         
         {#if data.api.about.linkedin}
-          <a href={data.api.about.linkedin} aria-label="links"
-            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
-          >
-            <i class="fab fa-linkedin text-2xl md:text-3xl"></i>
-          </a>
-        {/if}
-        
-        {#if data.api.about.instagram}
-          <a href={data.api.about.instagram} aria-label="links"
-            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
-          >
-            <i class="fab fa-instagram text-2xl md:text-3xl"></i>
-          </a>
-        {/if}
-        
-        {#if data.api.about.twitter}
-          <a href={data.api.about.twitter} aria-label="links"
-            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
-          >
-            <i class="fab fa-x-twitter text-2xl md:text-3xl"></i>
-          </a>
-        {/if}
-        
-        {#if data.api.about.facebook}
-          <a href={data.api.about.facebook} aria-label="links"
-            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
-          >
-            <i class="fab fa-facebook text-2xl md:text-3xl"></i>
-          </a>
-        {/if}
-        
-
-      </div>
-      <div class="flex gap-7 pt-8 z-20">
-        <button
-          class="border h-12 w-38 bg-hit border-hit rounded-lg font-semibold cursor-pointer" on:click={() => window.location.assign('www.linkedin.com/in/ibrahimhalilsezgin')}
-          >İşe Al
-        </button>
-        <button class="border h-12 w-40 rounded-lg cursor-pointer" on:click={() => goto('/cv.pdf')}>CV'mi İndir</button>
-      </div>
-
-      <div
-        class="md:flex md:items-center bg-black/40 w-80 md:w-150 text-nowrap rounded-2xl mt-8"
+        <a href={data.api.about.linkedin} aria-label="links"
+        class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+        >
+        <i class="fab fa-linkedin text-2xl md:text-3xl"></i>
+      </a>
+      {/if}
+      
+      {#if data.api.about.instagram}
+      <a href={data.api.about.instagram} aria-label="links"
+      class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
       >
-        <div class="h-20 text-center md:h-40 flex justify-center flex-col p-8 md:w-1/3 ">
-          <div class="text-hit md:text-2xl font-semibold">5+</div>
-          <div class="md:text-2xl">Deneyim</div>
-        </div>
-        <div class="md:h-18 bg-white/40 rounded-full w-1"></div>
-        <hr class="text-white/20">
-        <div class="h-20 md:h-40 flex justify-center flex-col p-8 md:w-1/3">
-          <div class="text-hit text-center md:text-2xl font-semibold">5+</div>
-          <div class="md:text-2xl text-center">Proje Sayısı</div>
-        </div>
-        <div class="md:h-18 bg-white/40 rounded-full w-1"></div>
-        <hr class="text-white/20">
-        <div class="h-20 text-center md:h-40 flex justify-center flex-col p-8 md:w-1/3 text-wrap">
-          <div class="text-hit md:text-2xl font-semibold">10+</div>
-          <div class="md:text-2xl">Mutlu Müşteriler</div>
-        </div>
-      </div>
-    </div>
-    <div class="w-1/2 justify-center md:flex hidden">
-      <div
-        class="absolute w-[400px] h-[400px] mt-65 bg-black/20 rounded-full z-1"
-      ></div>
-      <img src={profilePhoto} alt="" class="z-2 aspect-square w-[700px] h-[700px]" />
-    </div>
-  </div>
+      <i class="fab fa-instagram text-2xl md:text-3xl"></i>
+    </a>
+    {/if}
+    
+    {#if data.api.about.twitter}
+    <a href={data.api.about.twitter} aria-label="links"
+    class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+    >
+    <i class="fab fa-x-twitter text-2xl md:text-3xl"></i>
+  </a>
+  {/if}
+  
+  {#if data.api.about.facebook}
+  <a href={data.api.about.facebook} aria-label="links"
+  class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+  >
+  <i class="fab fa-facebook text-2xl md:text-3xl"></i>
+</a>
+{/if}
 
-  <div class="flex flex-col justify-center items-center mt-30 text-center" id="services">
+
+</div>
+<div class="flex gap-7 pt-2 z-20">
+
+<button class="border h-12 w-40 rounded-lg cursor-pointer" on:click={() => goto('/cv.pdf')}>CV'mi İndir</button>
+</div>
+
+<div
+class="md:flex md:items-center bg-black/40 w-80 md:w-150 text-nowrap rounded-2xl mt-8"
+>
+<div class="h-20 text-center md:h-40 flex justify-center flex-col p-8 md:w-1/3 ">
+  <div class="text-hit md:text-2xl font-semibold">5+</div>
+  <div class="md:text-2xl">Deneyim</div>
+</div>
+<div class="md:h-18 bg-white/40 rounded-full w-1"></div>
+<hr class="text-white/20">
+<div class="h-20 md:h-40 flex justify-center flex-col p-8 md:w-1/3">
+  <div class="text-hit text-center md:text-2xl font-semibold">5+</div>
+  <div class="md:text-2xl text-center">Proje Sayısı</div>
+</div>
+<div class="md:h-18 bg-white/40 rounded-full w-1"></div>
+<hr class="text-white/20">
+<div class="h-20 text-center md:h-40 flex justify-center flex-col p-8 md:w-1/3 text-wrap">
+  <div class="text-hit md:text-2xl font-semibold">10+</div>
+  <div class="md:text-2xl">Mutlu Müşteriler</div>
+</div>
+</div>
+</div>
+</BlurFade>
+</div>
+<BlurFade delay={0.05} >
+  
+  <div class="flex flex-col justify-center items-center mt-15 text-center" id="services">
     <div class="text-3xl md:text-5xl text-white">Hizmetlerim</div>
     <div class="pt-4 text-sm md:text-xl text-white/60">
       <!-- Buraya Açıklama Yazılabilir -->
@@ -193,6 +184,9 @@
       
     </div>
   </div>
+</BlurFade>
+  <BlurFade delay={0.05} >
+
   <div class="flex flex-col items-center justify-center mt-20 text-center" id="aboutme">
     <div class="text-3xl md:text-4xl">Hakkımda</div>
     <div class="text-white/50 mt-4 text-sm md:text-xl w-2/3">
@@ -219,6 +213,8 @@
       </div>
     </div>
   </div>
+  </BlurFade>
+  <BlurFade delay={0.05} >
 
   <div class="justify-center items-center flex flex-col mt-20">
 
@@ -239,6 +235,9 @@
       
       </div>
   </div>
+</BlurFade>
+  <BlurFade delay={0.05} >
+
   <div class="justify-center items-center flex flex-col mt-20">
 
     <div class="text-3xl md:text-4xl">
@@ -257,6 +256,8 @@
            
     </div>
   </div>
+</BlurFade>
+
   <div class="flex text-center flex-col items-center justify-center pt-16 mb-20" id="contact">
       <div class="md:text-4xl">İletişim</div>
       <div class="md:text-lg text-white/60">Bağlantınızı Genişletmek için Benimle İletişime geçin</div>
@@ -268,7 +269,7 @@
         </div>
         <div>
           <div class="flex flex-col gap-8">
-            <input type="email" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" placeholder="email" bind:value={contactForm.email}>
+            <input type="email" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" placeholder="Email" bind:value={contactForm.email}>
             <textarea class="bg-[#1b1b1b] rounded-lg h-36 md:w-120 pl-4 pt-4" placeholder="Mesaj" bind:value={contactForm.message}></textarea>
             <div class="flex justify-end">
                 <button class="border-white border p-3 rounded-lg w-25 justify-end cursor-pointer" on:click={sendcontact}>Gönder</button>
@@ -278,7 +279,7 @@
       </div>
   </div>
   {:else}
-  <div class="flex h-screen justify-center items-center">
+  <div class="flex flex-col fixed w-full h-screen justify-center items-center">
     <Diamonds />
   </div>
 {/if}

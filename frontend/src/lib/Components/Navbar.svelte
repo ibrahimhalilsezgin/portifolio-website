@@ -44,9 +44,7 @@
         <div on:click={(e) => scrollToSection(e,"aboutme")} class="cursor-pointer" aria-label="nav-link">Hakkımda</div>
         <div on:click={(e) => scrollToSection(e,"contact")} class="cursor-pointer" aria-label="nav-link">İletişim</div>
     </div>
-    <div class="w-1/3 hidden md:flex justify-end">
-        <button class="bg-hit w-28 text-lg h-10 rounded-lg">İşe Al</button>
-    </div>
+
     <div class="md:hidden w-full flex justify-end" bind:this={barButton} on:click={openMenu}>
         <i class="fa fa-bars text-4xl"></i>
     </div>
