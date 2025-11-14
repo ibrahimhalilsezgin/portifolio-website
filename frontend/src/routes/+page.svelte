@@ -64,11 +64,11 @@
 <div class="flex pl-12" transition:fade>
   
   <BlurFade delay={0.25} >
-  <div class="md:mt-32 w-1/2 gap-2 flex-col md:flex ">
+  <div class="md:m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex ">
         <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>
-        <h1 class="pt-3 text-xl md:text-3xl">{data.api.about.name}</h1>
+        <h1 class="pt-3 text-xl md:text-3xl text-nowrap">{data.api.about.name}</h1>
         <BlurFade delay={0.25 * 2} >
-        <div class="text-hit text-2xl md:text-6xl md:text-nowrap">{data.api.about.role}</div>
+        <div class="text-hit text-2xl md:text-6xl text-nowrap">{data.api.about.role}</div>
         </BlurFade>
         
         <div class="pt-8 flex gap-4 text-white/60 z-20">
