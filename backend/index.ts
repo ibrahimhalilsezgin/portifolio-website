@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
@@ -40,6 +40,9 @@ app.use('/contact/', contactRouter);
 
 app.use('/', express.static(path.join(__dirname, "uploads")))
 
+app.get('/', (req, res) => {
+    res.status(200).send('ok')
+})
 
 app.listen(PORT, () => {
     console.log(`server running on ${PORT} port`);
