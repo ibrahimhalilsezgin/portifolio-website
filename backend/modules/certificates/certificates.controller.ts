@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import CertificatesService from "./certificates.service";
-class settingsController {
+class certificatesController {
 
     async postCreateCertificate(req:Request, res:Response) {
         const {title} = req.body;
@@ -24,6 +24,6 @@ class settingsController {
 
 
 export default {
-    class: settingsController,
-    controller: new settingsController()
+    class: certificatesController,
+    controller: new certificatesController()
 }

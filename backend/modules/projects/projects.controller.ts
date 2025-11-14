@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import projectsService from "./projects.service";
-class settingsController {
+class projectController {
 
     async postCreateProject(req:Request, res:Response) {
         const {title, description} = req.body;
@@ -33,6 +33,6 @@ class settingsController {
 
 
 export default {
-    class: settingsController,
-    controller: new settingsController()
+    class: projectController,
+    controller: new projectController()
 }

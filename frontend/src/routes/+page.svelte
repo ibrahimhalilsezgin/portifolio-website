@@ -7,12 +7,29 @@
   import { goto } from "$app/navigation";
   import Particles from "$lib/Components/Particles.svelte";
   import BlurFade from "$lib/Components/BlurFade.svelte";
+  import axios from "axios";
+  import { PUBLIC_BACKEND_URL } from "$env/static/public";
   
   export let data;
-  let loading = false;
+  let loading = true;
 
   let selectedProject = "";
   let selectedCertificate = "";
+
+  let contactForm = {
+    email:'',
+    name:'',
+    phone:'',
+    message:''
+  }
+
+  async function sendcontact(){
+    const response = await axios({
+      url:PUBLIC_BACKEND_URL + '/contact/send',
+      method:'post',
+      data:contactForm
+     })
+  }
   onMount(() => {
     setTimeout(() => {
       loading = false;
@@ -42,7 +59,7 @@
   </div>
 {/if}
 {#if !loading}
-<div class="absolute w-full h-full">
+<div class="absolute w-full -z-10">
   <Particles />
 </div>
 <div class="flex " transition:fade>
@@ -50,31 +67,56 @@
   <div class="m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex">
     <BlurFade delay={0.25} >
         <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>
-        <h1 class="pt-3 text-xl md:text-3xl">İbrahim Halil Sezgin</h1>
+        <h1 class="pt-3 text-xl md:text-3xl">{data.api.about.name}</h1>
         <BlurFade delay={0.25 * 2} >
-        <div class="text-hit text-2xl md:text-6xl">Full-Stack Developer</div>
+        <div class="text-hit text-2xl md:text-6xl">{data.api.about.role}</div>
         </BlurFade>
       </BlurFade>
 
-      <div class="pt-8 flex gap-4 text-white/60">
-        <a href="https://instagram.com/ibrhmhl" aria-label="links"
-          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
-        >
-          <i class="fab fa-instagram text-2xl md:text-3xl"></i>
-      </a>
-        <a href="https://www.linkedin.com/in/ibrahimhalilsezgin/" aria-label="links"
-          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
-        >
-          <i class="fab fa-linkedin text-2xl md:text-3xl"></i>
-      </a>
-        <a href="https://github.com/ibrahimhalilsezgin" aria-label="links"
-          class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
-        >
-          <i class="fab fa-github text-2xl md:text-3xl"></i>
-      </a>
+      <div class="pt-8 flex gap-4 text-white/60 z-20">
+        {#if data.api.about.github}
+          <a href={data.api.about.github} aria-label="links"
+            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+          >
+            <i class="fab fa-github text-2xl md:text-3xl"></i>
+          </a>
+        {/if}
+        
+        {#if data.api.about.linkedin}
+          <a href={data.api.about.linkedin} aria-label="links"
+            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+          >
+            <i class="fab fa-linkedin text-2xl md:text-3xl"></i>
+          </a>
+        {/if}
+        
+        {#if data.api.about.instagram}
+          <a href={data.api.about.instagram} aria-label="links"
+            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+          >
+            <i class="fab fa-instagram text-2xl md:text-3xl"></i>
+          </a>
+        {/if}
+        
+        {#if data.api.about.twitter}
+          <a href={data.api.about.twitter} aria-label="links"
+            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+          >
+            <i class="fab fa-x-twitter text-2xl md:text-3xl"></i>
+          </a>
+        {/if}
+        
+        {#if data.api.about.facebook}
+          <a href={data.api.about.facebook} aria-label="links"
+            class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
+          >
+            <i class="fab fa-facebook text-2xl md:text-3xl"></i>
+          </a>
+        {/if}
+        
 
       </div>
-      <div class="flex gap-7 pt-8">
+      <div class="flex gap-7 pt-8 z-20">
         <button
           class="border h-12 w-38 bg-hit border-hit rounded-lg font-semibold cursor-pointer" on:click={() => window.location.assign('www.linkedin.com/in/ibrahimhalilsezgin')}
           >İşe Al
@@ -154,9 +196,7 @@
   <div class="flex flex-col items-center justify-center mt-20 text-center" id="aboutme">
     <div class="text-3xl md:text-4xl">Hakkımda</div>
     <div class="text-white/50 mt-4 text-sm md:text-xl w-2/3">
-      Küçüklüğümden beri bilgisayarlara olan ilgim, beni yazılım bölümüne yöneltti. Lise hayatıma başlamadan önce kendi çapımda JavaScript ve Node.js öğrendim. Zamanla bu alanda başarılı olduğumu hissettim. Zeytinburnu Mesleki ve Teknik Anadolu Lisesi’ne başladığımda, alan olarak Bilişim Teknolojilerini; dal olarak ise Yazılım Geliştirmeyi seçtim.
-      Devam eden  Lise hayatım boyunca, algoritmalar başta olmak üzere sırasıyla Python, C# ile masaüstü program geliştirme, HTML, CSS, Bootstrap, .NET ve .NET MVC, SQL öğrendim. Aktif Olarak DOS INDUSTRIES şirketinde Stajyer Öğrenci olarak çalışıyorum.
-
+      {data.api.about.aboutme}
     </div>
     <div class="flex items-center justify-center-safe pt-18">
       <div class="md:w-2/4 text-white/60 text- md:text-3xl flex items-center text-center">
@@ -223,15 +263,15 @@
 
       <div class="pt-5 md:flex gap-8">
         <div class="flex flex-col gap-8 mb-10 ">
-          <input type="text" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" placeholder="İsim">
-          <input type="text" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" placeholder="Telefon Numarası">
+          <input type="text" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" placeholder="İsim" bind:value={contactForm.name}>
+          <input type="tel" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" id="phone" name="phone" placeholder="5XX XXX XX XX" minlength="10" pattern={"[5][0-9]{9}"} inputmode="numeric" autocomplete="tel" bind:value={contactForm.phone}>
         </div>
         <div>
           <div class="flex flex-col gap-8">
-            <input type="email" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" placeholder="Email">
-            <textarea class="bg-[#1b1b1b] rounded-lg h-36 md:w-120 pl-4 pt-4" placeholder="Mesaj"></textarea>
+            <input type="email" class="bg-[#1b1b1b] rounded-lg h-12 md:w-120 pl-4" placeholder="email" bind:value={contactForm.email}>
+            <textarea class="bg-[#1b1b1b] rounded-lg h-36 md:w-120 pl-4 pt-4" placeholder="Mesaj" bind:value={contactForm.message}></textarea>
             <div class="flex justify-end">
-                <button class="border-white border p-3 rounded-lg w-25 justify-end">Gönder</button>
+                <button class="border-white border p-3 rounded-lg w-25 justify-end cursor-pointer" on:click={sendcontact}>Gönder</button>
             </div>
           </div>
         </div>

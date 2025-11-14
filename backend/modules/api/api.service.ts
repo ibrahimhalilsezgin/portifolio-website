@@ -1,22 +1,19 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import fs from "node:fs";
-
-import User from "../../db/models/User";
 import Skills from "../../db/models/Skills";
 import Projects from "../../db/models/Projects";
-import path from "node:path";
 import Certificates from "../../db/models/Certificates";
+import About from "../../db/models/About";
 
 export default {
     async getAllInfo() {
         const skills = await Skills.find({});
         const projects = await Projects.find({});
         const certificates = await Certificates.find({});
+        const about = await About.findOne({id:'default'});
         return {
             skills: skills,
             projects: projects,
-            certificates: certificates 
+            certificates: certificates,
+            about: about
         };
     },
     async getSkills() {

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import apiService from "./api.service";
-class settingsController {
+class apiController {
 
     async getAllInfo(req:Request, res:Response) {
         try {
@@ -47,6 +47,6 @@ class settingsController {
 
 
 export default {
-    class: settingsController,
-    controller: new settingsController()
+    class: apiController,
+    controller: new apiController()
 }

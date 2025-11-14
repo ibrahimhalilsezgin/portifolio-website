@@ -25,6 +25,8 @@ import apiRouter from "./modules/api/api.router";
 import projectsRouter from "./modules/projects/projects.router";
 import skillsRouter from "./modules/skills/skills.router";
 import certificatesRouter from "./modules/certificates/certificates.router";
+import aboutRouter from "./modules/aboutme/about.router";
+import contactRouter from "./modules/contact/contact.router";
 import path from "path";
 
 app.use('/auth/', userRouter);
@@ -33,6 +35,8 @@ app.use('/api/', apiRouter);
 app.use('/projects/', projectsRouter);
 app.use('/skills/', skillsRouter);
 app.use('/certificates/', certificatesRouter);
+app.use('/about/', aboutRouter);
+app.use('/contact/', contactRouter);
 
 app.use('/', express.static(path.join(__dirname, "uploads")))
 

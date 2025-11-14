@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import skillsService from "./skills.service";
-class settingsController {
+class skillsController {
 
     async postCreateSkill(req:Request, res:Response) {
         const {title, proficiency} = req.body;
@@ -25,6 +25,6 @@ class settingsController {
 
 
 export default {
-    class: settingsController,
-    controller: new settingsController()
+    class: skillsController,
+    controller: new skillsController()
 }

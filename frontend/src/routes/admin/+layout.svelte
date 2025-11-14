@@ -16,7 +16,7 @@
         
         
         <div class="w-full mt-10 h-3/4 flex flex-col gap-4">
-            <div class="bg-[#2E5979] text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer ">
+            <div class="bg-[#2E5979] text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/')}>
                 <LayoutDashboard size={27} />
                 Dashboard
             </div>
