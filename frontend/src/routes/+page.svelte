@@ -64,7 +64,7 @@
 <div class="flex pl-12" transition:fade>
   
   <BlurFade delay={0.25} >
-  <div class="m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex ">
+  <div class="md:mt-32 w-1/2 gap-2 flex-col md:flex ">
         <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>
         <h1 class="pt-3 text-xl md:text-3xl">{data.api.about.name}</h1>
         <BlurFade delay={0.25 * 2} >
