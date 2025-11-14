@@ -16,7 +16,6 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
     "@types/multer": "^2.0.0",
-    "@types/nodecontacter": "^7.0.3",
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
@@ -26,7 +25,6 @@
     "mongoose": "^8.19.3",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
-    "nodecontacter": "^7.0.10",
     "resend": "^6.4.2"
   },
   "devDependencies": {
