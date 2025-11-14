@@ -16,7 +16,7 @@
     async function submit() {
         try {
             const response = await axios({
-                url:PUBLIC_BACKEND_URL + '/skills/updatesettings',
+                url:PUBLIC_BACKEND_URL + '/settings/updatesettings',
                 headers:{
                     Authorization: 'Bearer ' + getCookie('token')
                 },
