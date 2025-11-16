@@ -2,6 +2,7 @@ import Skills from "../../db/models/Skills";
 import Projects from "../../db/models/Projects";
 import Certificates from "../../db/models/Certificates";
 import About from "../../db/models/About";
+import Blog from "../../db/models/Blog";
 
 export default {
     async getAllInfo() {
@@ -36,5 +37,10 @@ export default {
 
         return project;
     },
+    async getBlogs() {
+        const blogs = await Blog.find({  });
+        return blogs
+
+    }
     
 }

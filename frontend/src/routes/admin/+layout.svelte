@@ -47,6 +47,12 @@
                 <Inbox size={27} />
                 Contact Inquiries
             </div>
+            <hr>
+            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/blogs')}>
+                <Inbox size={27} />
+                Blogs
+            </div>
+            
         </div>
         <hr class="text-black">
         <div class="w-full pt-4 flex flex-col gap-4 pl-4">

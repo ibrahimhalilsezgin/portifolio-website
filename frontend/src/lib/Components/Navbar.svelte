@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+
     let barButton:HTMLDivElement;
     let xButton:HTMLDivElement;
     let menuDiv:HTMLDivElement;
@@ -43,6 +45,7 @@
         <div on:click={(e) => scrollToSection(e,"services")} class="cursor-pointer" aria-label="nav-link">Hizmetler</div>
         <div on:click={(e) => scrollToSection(e,"aboutme")} class="cursor-pointer" aria-label="nav-link">Hakkımda</div>
         <div on:click={(e) => scrollToSection(e,"contact")} class="cursor-pointer" aria-label="nav-link">İletişim</div>
+        <div on:click={(e) => goto('/blog')} class="cursor-pointer" aria-label="nav-link">Blog</div>
     </div>
 
     <div class="md:hidden w-full flex justify-end" bind:this={barButton} on:click={openMenu}>
@@ -54,9 +57,10 @@
 </div>
 <div class="bg-[#1b1b1b] text-center hidden" bind:this={menuDiv}>
     <div class="flex-col flex justify-center text-xl text-white/70 gap-4">
-        <div class="text-hit border border-white/25 rounded-lg p-4">Home</div>
-        <div class="border border-white/25 rounded-lg p-4">Services</div>
-        <div class="border border-white/25 rounded-lg p-4">About me</div>
-        <div class="border border-white/25 rounded-lg p-4">Contact Me</div>
+        <div on:click={(e) => scrollToSection(e,"home")} class="text-hit border border-white/25 rounded-lg p-4">Anasayfa</div>
+        <div on:click={(e) => scrollToSection(e,"services")} class="border border-white/25 rounded-lg p-4">Hizmetler</div>
+        <div on:click={(e) => scrollToSection(e,"aboutme")} class="border border-white/25 rounded-lg p-4">Hakkımda</div>
+        <div on:click={(e) => scrollToSection(e,"contact")} class="border border-white/25 rounded-lg p-4">İletişim</div>
+        <div on:click={(e) => goto("blog")} class="border border-white/25 rounded-lg p-4">Blog</div>
     </div>
 </div>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+    import { goto } from "$app/navigation";
     import axios from "axios";
-  import { setCookie } from "../../../utils/cookie.util";
-  import { PUBLIC_BACKEND_URL } from "$env/static/public";
+    import { setCookie } from "../../../utils/cookie.util";
+    import { PUBLIC_BACKEND_URL } from "$env/static/public";
     let formData = {
         username:'',
         password:''

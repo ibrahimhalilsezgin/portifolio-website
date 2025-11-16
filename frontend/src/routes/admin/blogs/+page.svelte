@@ -11,25 +11,25 @@
 
 
 
-    let projects:any = [];
-    async function getProjects() {
+    let blogs:any = [];
+    async function getBlogs() {
         const response = await axios({
             method:'GET',
-            url:PUBLIC_BACKEND_URL+'/api/projects',
+            url:PUBLIC_BACKEND_URL+'/api/blogs',
             headers:{
                 Authorization: 'Bearer ' + getCookie('token')
             }
         });
 
-        projects = response.data;
+        blogs = response.data;
     };
     onMount(async () => {
-        getProjects();
+        getBlogs();
     })
-    async function deleteProject(id:string) {
+    async function deleteBlog(id:string) {
         const response = await axios({
             method:'POST',
-            url:PUBLIC_BACKEND_URL + '/projects/deleteproject',
+            url:PUBLIC_BACKEND_URL + '/blog/delete',
             data:{
                 id: id
             },
@@ -38,7 +38,7 @@
             }
         });
         if(response.status == 200) {
-            getProjects()
+            getBlogs()
         }
     }
 </script>
@@ -46,12 +46,12 @@
 
 <div class="flex">
     <div class="w-1/2">
-        <h1 class="text-4xl">Manage Projects</h1>
+        <h1 class="text-4xl">Manage Blogs</h1>
     </div>
     <div class="w-1/2 flex justify-end items-center">
-        <button class="flex gap-3 bg-blue-600 h-12 items-center justify-center w-42 rounded-lg cursor-pointer" on:click={() => goto('/admin/projects/create')}>
+        <button class="flex gap-3 bg-blue-600 h-12 items-center justify-center w-42 rounded-lg cursor-pointer" on:click={() => goto('/admin/blogs/create')}>
             <div><Plus /></div>
-            <div>Add New Projects</div>
+            <div>Add New Blogs</div>
         </button>
     </div>
 </div>
@@ -70,33 +70,30 @@
             <div class="flex flex-col w-full">
                 <div class="flex w-full pb-5 p-4">
                     <div class="w-1/3">
-                        Project
+                        Title
                     </div>
                     <div class="w-1/3 flex text-center justify-center items-center">
-                        Description
-                    </div>
-                    <div class="w-1/3">
-                        
+                        Created
                     </div>
                     <div>
                         Actions
                     </div>
                 </div>
                 
-                {#each projects as Project}
+                {#each blogs as Blog}
                     <div class="flex w-full pb-5 border-t z-40 border-t-adminbg-3 p-4" transition:slide={{axis:"y",easing:cubicOut}}>
-                        <LinkImageHover cl="w-1/3" hrefDetails={{text: Project.title, href:"#",imgAlt: Project.description, imgSrc:`${PUBLIC_BACKEND_URL}/projects/${Project.title}.jpeg`}} />
+                        <LinkImageHover cl="w-1/3" hrefDetails={{text: Blog.title, href:"#",imgAlt: Blog.title, imgSrc:`${PUBLIC_BACKEND_URL}/projects/${Blog.title}.jpeg`}} />
                         <div class="w-full">
                             <div class="bg-green-400/30 w-min min-w-24 flex items-center text-nowrap p-2 justify-center text-green-300 rounded-lg">
-                                {Project.description}
+                                {Blog.createdAt}
                             </div>
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button class="cursor-pointer hover:text-slate-500" on:click={() => goto('/admin/projects/edit/' + Project.id)}>
+                            <button class="cursor-pointer hover:text-slate-500" on:click={() => goto('/admin/blogs/edit/' + Blog.id)}>
                                 <Pencil size={32} />
                             </button>
-                            <button class="cursor-pointer hover:text-red-500" on:click={() => deleteProject(Project.id)}>
+                            <button class="cursor-pointer hover:text-red-500" on:click={() => deleteBlog(Blog.id)}>
                                 <Trash2 size={32}/>
                             </button>
                         </div>

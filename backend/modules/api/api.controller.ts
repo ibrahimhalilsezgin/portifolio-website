@@ -43,6 +43,14 @@ class apiController {
             res.status(400).json({ message: error });
         };
     };
+    async getBlogs(req:Request, res:Response) {
+        try {
+            const result = await apiService.getBlogs();
+            res.json(result);
+        } catch (error:any) {
+            res.status(400).json({ message: error });
+        }
+    }
 };
 
 

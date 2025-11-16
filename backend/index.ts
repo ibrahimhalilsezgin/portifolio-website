@@ -2,6 +2,7 @@ import express, { Request } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
+import path from "path";
 import "dotenv/config";
 
 
@@ -27,7 +28,7 @@ import skillsRouter from "./modules/skills/skills.router";
 import certificatesRouter from "./modules/certificates/certificates.router";
 import aboutRouter from "./modules/aboutme/about.router";
 import contactRouter from "./modules/contact/contact.router";
-import path from "path";
+import blogRouter from "./modules/blog/blog.router";
 
 app.use('/auth/', userRouter);
 app.use('/settings/', settingsRouter);
@@ -37,6 +38,7 @@ app.use('/skills/', skillsRouter);
 app.use('/certificates/', certificatesRouter);
 app.use('/about/', aboutRouter);
 app.use('/contact/', contactRouter);
+app.use('/blog/', blogRouter);
 
 app.use('/', express.static(path.join(__dirname, "uploads")))
 
