@@ -85,12 +85,12 @@
                         <LinkImageHover cl="w-1/3" hrefDetails={{text: Blog.title, href:"#",imgAlt: Blog.title, imgSrc:`${PUBLIC_BACKEND_URL}/projects/${Blog.title}.jpeg`}} />
                         <div class="w-full">
                             <div class="bg-green-400/30 w-min min-w-24 flex items-center text-nowrap p-2 justify-center text-green-300 rounded-lg">
-                                {Blog.createdAt}
+                                {Blog.createdDate}
                             </div>
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <button class="cursor-pointer hover:text-slate-500" on:click={() => goto('/admin/blogs/edit/' + Blog.id)}>
+                            <button class="cursor-pointer hover:text-slate-500" on:click={() => goto('/admin/blogs/update/' + Blog.id)}>
                                 <Pencil size={32} />
                             </button>
                             <button class="cursor-pointer hover:text-red-500" on:click={() => deleteBlog(Blog.id)}>
