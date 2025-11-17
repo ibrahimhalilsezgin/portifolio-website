@@ -1,4 +1,4 @@
-import { NextFunction, Router } from "express";
+import { Request,Response, NextFunction, Router } from "express";
 import blogController from "./blog.controller";
 import { authenticateToken } from "../../middleware/authentication";
 import multer from "multer";
@@ -53,7 +53,7 @@ router.post('/upload', upload.single('blogsImage'), (req:Request, res:Response, 
 
     const file = req.file;
     if(!file) return;
-    const newPath = path.join(file.destination, `${title}.jpeg`);
+    const newPath = path.join(file.destination, `${title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')}.jpeg`);
 
     fs.renameSync(file.path, newPath);
 

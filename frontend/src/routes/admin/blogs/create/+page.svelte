@@ -41,6 +41,9 @@
                 },
                 data: imageFormData
             }).then(res => res.status == 200 ? success = true : success = false)
+            setTimeout(function() {
+                success = false
+            }, 2500)
         }
     }
 </script>

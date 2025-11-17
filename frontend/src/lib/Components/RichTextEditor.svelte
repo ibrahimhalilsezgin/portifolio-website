@@ -3,141 +3,159 @@
   const dispatch = createEventDispatcher();
 
   // Props
-  export let threshold = 80; // karakter sayısı - bir satır için
+  export let threshold = 80;
   export let placeholder = 'Yazmaya başla...';
-  export let value = ''; // içerik (html)
+  export let value = '';
 
   let editor;
+  let inputTimeout;
 
-  // Yardımcı: caret konumuna br ekler
+  // Caret konumuna BR ekler
   function insertBRAtCaret() {
     const sel = window.getSelection();
-    if (!sel || !sel.rangeCount) return;
+    if (!sel?.rangeCount) return;
+    
     const range = sel.getRangeAt(0);
-
-    // Eğer caret bir metin düğümündeyse, önce bir br düğümü ekle
     const br = document.createElement('br');
-    range.collapse(false);
+    
+    range.deleteContents();
     range.insertNode(br);
-
-    // Sonrasında caret'i br sonrasına taşı
+    
+    // Caret'i BR sonrasına taşı
     range.setStartAfter(br);
-    range.setEndAfter(br);
+    range.collapse(true);
     sel.removeAllRanges();
     sel.addRange(range);
   }
 
-  // Metin içeriğini (saf text) al, son satırı hesapla
+  // Son satırın uzunluğunu hesapla
   function getLastLineLength() {
-    // innerText satır atlamalarını hesaba katar
-    const text = editor.innerText || '';
+    const text = editor?.innerText || '';
     const lines = text.split('\n');
-    return lines[lines.length - 1].length;
+    return lines[lines.length - 1]?.length || 0;
   }
 
-  // input olayında kontrol et
-  let inputTimeout;
-  function onInput(e) {
-    // value olarak HTML dispatch et
+  // Input olayı
+  function onInput() {
+    if (!editor) return;
+    
     value = editor.innerHTML;
     dispatch('input', { value });
 
-    // debounce küçük gecikme: DOM tamamen güncellensin
     clearTimeout(inputTimeout);
     inputTimeout = setTimeout(() => {
       const lastLen = getLastLineLength();
       if (lastLen >= threshold) {
-        // satır uzunluğu eşik aşıyorsa caret yerine br ekle
         insertBRAtCaret();
-        // güncellenmiş html'i gönder
         value = editor.innerHTML;
         dispatch('input', { value });
       }
     }, 30);
   }
 
-  // Basit toolbar komutları (bold, italic, underline)
+  // Toolbar komutları
   function exec(cmd) {
-    // execCommand eski ama yaygın çalışır; modern projelerde Range/Selection ile iyileştirilebilir
     document.execCommand(cmd, false, null);
-    // güncelle
-    value = editor.innerHTML;
-    dispatch('input', { value });
-    editor.focus();
+    if (editor) {
+      value = editor.innerHTML;
+      dispatch('input', { value });
+      editor.focus();
+    }
   }
 
-  // Yapıştırma: sadeleştir (sadece düz metin)
+  // Yapıştırma - sadece düz metin
   function onPaste(e) {
     e.preventDefault();
-    const text = (e.clipboardData || window.clipboardData).getData('text');
-    // düz metin olarak yapıştır
+    
+    const text = e.clipboardData?.getData('text') || '';
     const sel = window.getSelection();
-    if (!sel || !sel.rangeCount) return;
-    sel.deleteFromDocument();
-    sel.getRangeAt(0).insertNode(document.createTextNode(text));
-
-    // caret'i text sonrasına taşı
-    const range = document.createRange();
-    range.setStart(editor, editor.childNodes.length);
-    range.collapse(true);
+    
+    if (!sel?.rangeCount || !editor) return;
+    
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    range.insertNode(document.createTextNode(text));
+    
+    // Caret'i text sonuna taşı
+    range.collapse(false);
     sel.removeAllRanges();
     sel.addRange(range);
-
-    // input tetikle
+    
     onInput();
   }
 
-  // dışarıdan value değişirse editor güncelle
+  // Enter tuşu davranışı
+  function onKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      insertBRAtCaret();
+      onInput();
+    }
+  }
+
+  // Value değiştiğinde editor'ü güncelle
   $: if (editor && value !== editor.innerHTML) {
     editor.innerHTML = value || '';
   }
 
   onMount(() => {
-    if (!value) editor.innerHTML = '';
+    if (editor && !value) {
+      editor.innerHTML = '';
+    }
   });
 </script>
 
-<style>
-  .toolbar {
-    display:flex;
-    gap:0.5rem;
-    margin-bottom:0.5rem;
-  }
-  .editor {
-    min-height:100px;
-    min-width: 100%;
-    border:1px solid #ddd;
-    padding:0.5rem;
-    border-radius:6px;
-    outline:none;
-    white-space: pre-wrap;
-    word-break: break-word;
-    overflow-wrap: break-word;}
-  .placeholder {
-    color:#888;
-  }
-  button { cursor:pointer }
-</style>
+<div class="w-full ">
+  <div class="flex gap-2 mb-3 p-2 bg-transparent border border-gray-200 rounded-lg">
+    <button 
+      type="button" 
+      class="text-black min-w-9 h-9 px-2 bg-white border border-gray-300 rounded-md cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:border-gray-400 active:scale-95 active:bg-gray-200 flex items-center justify-center text-sm"
+      on:click={() => exec('bold')}
+      title="Kalın (Ctrl+B)"
+    >
+      <strong>B</strong>
+    </button>
+    <button 
+      type="button" 
+      class="text-black min-w-9 h-9 px-2 bg-white border border-gray-300 rounded-md cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:border-gray-400 active:scale-95 active:bg-gray-200 flex items-center justify-center text-sm"
+      on:click={() => exec('italic')}
+      title="İtalik (Ctrl+I)"
+    >
+      <em>I</em>
+    </button>
+    <button 
+      type="button" 
+      class="text-black min-w-9 h-9 px-2 bg-white border border-gray-300 rounded-md cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:border-gray-400 active:scale-95 active:bg-gray-200 flex items-center justify-center text-sm"
+      on:click={() => exec('underline')}
+      title="Altı çizili (Ctrl+U)"
+    >
+      <u>U</u>
+    </button>
+  </div>
 
-<div class="toolbar">
-  <button type="button" on:click={() => exec('bold')}>B</button>
-  <button type="button" on:click={() => exec('italic')}>I</button>
-  <button type="button" on:click={() => exec('underline')}>U</button>
+  <div
+    class="overflow-y-scroll max-h-70 min-h-[150px] w-full border-2 border-gray-300 p-4 rounded-lg outline-none whitespace-pre-wrap break-words leading-relaxed transition-all duration-200 bg-transparent focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)] {!value ? 'empty' : ''}"
+    contenteditable="true"
+    bind:this={editor}
+    on:input={onInput}
+    on:paste={onPaste}
+    on:keydown={onKeyDown}
+    data-placeholder={placeholder}
+    role="textbox"
+    aria-multiline="true"
+    tabindex="0"
+  />
 </div>
 
-<!-- contenteditable alanı -->
-<div
-  class="editor"
-  contenteditable="true"
-  bind:this={editor}
-  on:input={onInput}
-  on:paste={onPaste}
-  on:keydown={(e) => {
-    // Enter yerine default davranış istiyorsanız burayı özelleştirin.
-    // Örneğin Shift+Enter'ı br, Enter'ı <p> gibi davranmaya zorlayabilirsiniz.
-  }}
-  aria-placeholder={placeholder}
-  role="textbox"
-></div>
+<style>
+  .empty:before {
+    content: attr(data-placeholder);
+    color: #999;
+    pointer-events: none;
+    position: absolute;
+  }
 
-<!-- Kullanım notu: value güncellenince dışarıya 'input' eventi dispatch eder -->
+  .empty:focus:before {
+    color: #bbb;
+  }
+</style>
