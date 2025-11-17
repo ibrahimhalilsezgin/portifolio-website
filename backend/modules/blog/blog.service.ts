@@ -3,7 +3,7 @@ import moment from "moment";
 
 moment.locale('tr');
 export default {
-    async createBlog(title:string, content:string, imageUrl?:string){
+    async createBlog(title:string, content:string, imageUrl:string){
         try {
             if(!title || !content) throw Error('Tüm boşluklar doldurulmalıdır.');
             if(imageUrl) {
