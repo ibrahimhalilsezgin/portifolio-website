@@ -41,6 +41,11 @@ export default {
         const blogs = await Blog.find({  });
         return blogs
 
+    },
+    async getBlogInfo(id:string) {
+        const blog = await Blog.findOne({ id });
+        if(!blog) throw Error('Blog Bulunamadı.');
+        return blog;
     }
     
 }

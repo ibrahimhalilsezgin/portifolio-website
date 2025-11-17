@@ -7,12 +7,12 @@
     import { PUBLIC_BACKEND_URL } from "$env/static/public";
     import RichTextEditor from "$lib/Components/RichTextEditor.svelte";
 
+    export let data;
     let formData = {
-        title:'',
-        content:''
+        id: data.params.id,
+        title:data.blog.title,
+        content:data.blog.content
     }
-    $: console.log(formData)
-    let file:any;
     let success = false;
     async function submit() {
         const response = await axios({
@@ -21,27 +21,10 @@
             headers:{
                 Authorization: 'Bearer ' + getCookie('token')
             },
-            data: {
-                title:formData.title,
-                content: formData.content
-            }
+            data: formData
         })
 
-        
-
-        if(response.status == 200) {
-            const imageFormData = new FormData();
-            imageFormData.append('blogsImage', file[0]);
-            imageFormData.append('title', formData.title)
-            await axios({
-                method:'post',
-                url:PUBLIC_BACKEND_URL + '/blog/upload',
-                headers:{
-                    Authorization: 'Bearer ' + getCookie('token')
-                },
-                data: imageFormData
-            }).then(res => res.status == 200 ? success = true : success = false)
-        }
+        response.status == 200 ? success = true : success = false;
     }
 </script>
 

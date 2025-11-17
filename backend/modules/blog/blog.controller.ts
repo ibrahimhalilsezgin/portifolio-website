@@ -16,6 +16,7 @@ class blogController {
             const result = await blogService.updateBlog(id,title, content);
             res.json(result)
         } catch (error:any) {
+            console.log(error)
             res.status(400).json({ message: error });
         }
     }

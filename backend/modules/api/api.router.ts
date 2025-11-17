@@ -14,7 +14,7 @@ methodNames.forEach((method:string) => {
     httpMethod == "pos" ? httpMethod = "post" : "";
 
     const routeName = "/" + method.slice(httpMethod.length).toLowerCase();
-    if(routeName == "/projectinfo") return;
+    if(routeName == "/projectinfo" || routeName == '/bloginfo') return;
     console.log(`${httpMethod} /api${routeName} Loaded.`)
     if (router[httpMethod]) {
         router[httpMethod](
@@ -25,5 +25,6 @@ methodNames.forEach((method:string) => {
 });
 
 router.get('/projectinfo/:id', apiController.controller.getProjectInfo)
+router.get('/bloginfo/:id', apiController.controller.getBlogInfo)
 
 export default router;

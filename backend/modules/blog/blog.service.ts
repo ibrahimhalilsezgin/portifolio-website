@@ -25,6 +25,7 @@ export default {
             if(!blog) throw Error('Blog bulunamadı.');
 
             const updatedBlog = await Blog.findOneAndUpdate({id}, {
+                id:title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, ''),
                 title,
                 content,
                 updatedDate: moment().format('LLL')

@@ -3,3 +3,5 @@ backend/node_modules
 backend/package-lock.json
 frontend/package-lock.json
 backend/uploads
+backend/.env.example
+backend/modules/blog/blog.service.ts
