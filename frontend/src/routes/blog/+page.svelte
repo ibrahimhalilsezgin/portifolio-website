@@ -36,9 +36,6 @@
 <div class="grid grid-cols-3 mt-10 pl-12 gap-8 pr-12">
     {#each blogs as blog}
         <div class="flex flex-col border border-[#212121] rounded-lg bg-[#1b1b1b]">
-            {#if !blog.imageUrl}
-            <img class="rounded-t-sm aspect-video" src="{blog.imageUrl ? blog.imageUrl : `${PUBLIC_BACKEND_URL}/blogs/${blog.id}.jpeg`}" alt={blog.title}>
-            {/if}
             <div class="text-3xl font-semibold p-3 text-center">
                 {blog.title}
             </div>
