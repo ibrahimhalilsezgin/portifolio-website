@@ -3,14 +3,24 @@ import moment from "moment";
 
 moment.locale('tr');
 export default {
-    async createBlog(title:string, content:string){
+    async createBlog(title:string, content:string, imageUrl?:string){
         try {
             if(!title || !content) throw Error('Tüm boşluklar doldurulmalıdır.');
+            if(imageUrl) {
+            const newBlog =  await new Blog({
+                id: title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, ''),
+                title,
+                content,
+                imageUrl
+            }).save();
+            return newBlog;
+            }
             const newBlog = await new Blog({
                 id: title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, ''),
                 title,
-                content
+                content,
             }).save();
+
             console.log(newBlog)
             return newBlog;
         } catch (error:any) {

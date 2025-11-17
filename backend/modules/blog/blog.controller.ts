@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import blogService from "./blog.service";
 class blogController {
     async postCreate(req:Request, res:Response) {
-        const {title, content} = req.body;
+        const {title, content, imageUrl} = req.body;
         try {
-            const result = await blogService.createBlog(title, content);
+            const result = await blogService.createBlog(title, content, imageUrl);
             res.json(result)
         } catch (error:any) {
             res.status(400).json({ message: error });

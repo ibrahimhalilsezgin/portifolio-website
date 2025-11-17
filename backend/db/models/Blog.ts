@@ -20,6 +20,10 @@ const schema = new Schema({
     updatedDate:{
         type:String,
     },
+    imageUrl:{
+        type:String,
+        default:''
+    },
     comments:[{
         name:{
             type:String,
