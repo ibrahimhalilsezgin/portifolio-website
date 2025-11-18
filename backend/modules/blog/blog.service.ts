@@ -68,7 +68,7 @@ export default {
                 - Uzun, detaylı ve tamamen HTML etiketleriyle yazılmış bir "content" üret.
                 - Google görsellerden geçerli bir resim bul ve linkini "imageURL" değerine koy. (Unsplash KULLANMA.)
                 - Ürettiğin içerikte gün, ay, yıl veya herhangi bir tarih GEÇMEYECEK.
-                - Yapay zeka ile alakalı değil yazılım dilleriyle alakalı şeyler yazabilirsin
+                - Yapay zeka ile alakalı değil belirli bir yazılım diliyle alakalı şeyler yazabilirsin
                 - bilgisayar parçaları hakkında konuşabilirsin
                 - Sonuç SADECE aşağıdaki JSON formatında olacak, başka hiçbir açıklama yazmayacaksın:
 
