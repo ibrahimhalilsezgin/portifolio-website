@@ -38,7 +38,7 @@ export default {
         return project;
     },
     async getBlogs() {
-        const blogs = await Blog.find({  });
+        const blogs = await Blog.find({  }).sort({ _id: -1});
         return blogs
 
     },
