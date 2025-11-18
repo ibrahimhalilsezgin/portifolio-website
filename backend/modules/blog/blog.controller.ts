@@ -32,7 +32,7 @@ class blogController {
     async getSubject(req:Request, res:Response) {
         try {
             const result = await blogService.getSubject();
-            res.json(result)
+            res.send(result)
         } catch (error) {
             res.status(400).json({ message: error });
         }
