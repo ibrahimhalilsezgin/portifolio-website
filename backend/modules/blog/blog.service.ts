@@ -158,7 +158,7 @@ export default {
                 SADECE JSON FORMATINDA VER MARKDOWN FORMATINDA VERME`,
             ]
 
-            let random = Math.floor(Math.random() * subject.length) + 1;
+            let random = Math.floor(Math.random() * subject.length);
 
             return subject[random];
         } catch (error) {
