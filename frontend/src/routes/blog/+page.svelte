@@ -42,6 +42,9 @@
             <div class="p-3 pt-1 w-full h-full">
                 <span class="text-wrap break-all">{@html blog.content.slice(0, 120) + '...'}</span>
             </div>
+            <div class="flex justify-end items-end text-sm pr-2 text-slate-400">
+                {blog.createdDate}
+            </div>
             <div class="mt-5 flex">
                 <button class="bg-blue-300 text-black w-full text-lg font-semibold h-8 cursor-pointer" on:click={() => goto('/blog/' + blog.id)}>
                     Devamını Oku..
