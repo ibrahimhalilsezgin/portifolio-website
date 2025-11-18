@@ -27,16 +27,16 @@
 
 
 
-<div class="flex flex-col pl-12">
+<div class="flex flex-col  items-center md:pl-12 md:items-start">
     <div class="text-4xl font-semibold">
         Bloglara Göz Atın 
     </div>
 </div>
 
-<div class="grid grid-cols-3 mt-10 pl-12 gap-8 pr-12">
+<div class="grid md:grid-cols-3 mt-10 pl-8 md:pl-12 gap-8 pr-12">
     {#each blogs as blog}
         <div class="flex flex-col border border-[#212121] rounded-lg bg-[#1b1b1b]">
-            <div class="text-3xl font-semibold p-3 text-center">
+            <div class="text-2xl md:text-3xl font-semibold p-3 text-center">
                 {blog.title}
             </div>
             <div class="p-3 pt-1 w-full h-full">
