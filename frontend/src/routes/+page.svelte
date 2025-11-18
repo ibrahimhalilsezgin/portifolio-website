@@ -8,9 +8,12 @@
   import BlurFade from "$lib/Components/BlurFade.svelte";
   import axios from "axios";
   import { PUBLIC_BACKEND_URL } from "$env/static/public";
-  
+  import { getCookie, setCookie } from "../utils/cookie.util";
+    import { Cookie } from "lucide-svelte";
+
+		
   export let data;
-  let loading = true;
+  let loading = false;
 
   let selectedProject = "";
   let selectedCertificate = "";
@@ -29,11 +32,30 @@
       data:contactForm
      })
   }
-  onMount(() => {
+  let cookieAccess:string;
+  async function acceptCookie() {
+      setCookie('allowCollectCookies', true)
+      cookieAccess = 'true'
+  }
+  onMount(async () => {
+    cookieAccess = getCookie('allowCollectCookies');
+    if(!cookieAccess) {
+        setCookie('allowCollectCookies', false)
+    }
+
+    if(cookieAccess = 'true') {
+        const response = await axios({
+          url:PUBLIC_BACKEND_URL + '/collect',
+          method:'post'
+        })
+        console.log(response)
+    }
+
     setTimeout(() => {
       loading = false;
     },2000)
   });
+
 </script>
 
 
@@ -57,12 +79,24 @@
     </div>
   </div>
 {/if}
+{#if cookieAccess == 'false'}
+  <div class="hidden md:flex fixed items-center h-15 gap-2 bottom-0 bg-[#424242] w-full z-50" transition:slide>
+    <div>
+      <Cookie size={60} />  
+    </div>
+    <div class="text-4xl">
+      Deneyiminizi geliştirmek için çerezleri kullanıyoruz. Kabul etmeniz durumunda site daha iyi çalışır.
+    </div>
+    <button class="border hover:bg-hit rounded-lg h-full w-48 cursor-pointer" on:click={acceptCookie}>
+        Kabul Et
+    </button>
+  </div>
+{/if}
 {#if !loading}
 <div class="absolute w-full -z-10">
   <Particles />
 </div>
-<div class="flex pl-12" transition:fade>
-  
+<div class="flex pl-12 pr-12" transition:fade>
   <BlurFade delay={0.25} >
   <div class="md:m-12 md:mt-32 w-1/2 gap-2 flex-col md:flex ">
         <div class="text-lg md:text-2xl text-white/40">Merhaba, Ben</div>

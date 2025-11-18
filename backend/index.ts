@@ -29,6 +29,7 @@ import certificatesRouter from "./modules/certificates/certificates.router";
 import aboutRouter from "./modules/aboutme/about.router";
 import contactRouter from "./modules/contact/contact.router";
 import blogRouter from "./modules/blog/blog.router";
+import CollectedData from "./db/models/CollectedData";
 
 app.use('/auth/', userRouter);
 app.use('/settings/', settingsRouter);
@@ -44,6 +45,20 @@ app.use('/', express.static(path.join(__dirname, "uploads")))
 
 app.get('/', (req, res) => {
     res.status(200).send('ok')
+})
+app.post('/collect', async (req, res) => {
+        const ip =
+        req.headers['cf-connecting-ip'] ||
+        req.headers['x-forwarded-for'] ||
+        req.socket.remoteAddress;
+
+        await CollectedData.findOneAndUpdate({id:'default'}, {
+            $push: {
+                ip: ip
+            }
+        });
+        console.log(ip)
+        return res.status(200);
 })
 
 app.listen(PORT, () => {

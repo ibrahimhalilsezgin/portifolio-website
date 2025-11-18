@@ -3,7 +3,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import Navbar from '$lib/Components/Navbar.svelte';
 	import { page } from '$app/stores';
-		
+
 	let { children } = $props();
 
 	const isAdminPage = $derived($page.url.pathname.includes('/admin'))
@@ -16,3 +16,4 @@
 	<Navbar />
 {/if}
 {@render children()}
+
