@@ -56,5 +56,113 @@ export default {
         } catch (error:any) {
             throw Error(error)
         }
+    },
+    async getSubject(){
+        try {
+            const subject = [
+                `Sen, teknoloji ve yazılım konularında uzman bir blog yazarı gibi davran.
+                Teknoloji, yazılım, programlama veya bilgisayar donanımı hakkında ilgi çekici, bilgilendirici ve SEO uyumlu bir blog yazısı hazırla.
+
+                Kurallar:
+                - Bir adet "title" üret.
+                - Uzun, detaylı ve tamamen HTML etiketleriyle yazılmış bir "content" üret.
+                - Google görsellerden geçerli bir resim bul ve linkini "imageURL" değerine koy. (Unsplash KULLANMA.)
+                - Ürettiğin içerikte gün, ay, yıl veya herhangi bir tarih GEÇMEYECEK.
+                - Yapay zeka ile alakalı değil yazılım dilleriyle alakalı şeyler yazabilirsin
+                - bilgisayar parçaları hakkında konuşabilirsin
+                - Sonuç SADECE aşağıdaki JSON formatında olacak, başka hiçbir açıklama yazmayacaksın:
+
+                {
+                    "title": "Yazı Başlığı",
+                    "content": "HTML formatında uzun blog içeriği...",
+                    "imageURL": "Geçerli resim URL'si"
+                }
+
+                SADECE JSON FORMATINDA VER MARKDOWN FORMATINDA VERME`,
+                `Sen, teknoloji ve yazılım konularında uzman bir blog yazarı gibi davran.
+                Teknoloji, yazılım, programlama veya bilgisayar donanımı hakkında ilgi çekici, bilgilendirici ve SEO uyumlu bir blog yazısı hazırla.
+
+                Kurallar:
+                - Bir adet "title" üret.
+                - Uzun, detaylı ve tamamen HTML etiketleriyle yazılmış bir "content" üret.
+                - Google görsellerden geçerli bir resim bul ve linkini "imageURL" değerine koy. (Unsplash KULLANMA.)
+                - Ürettiğin içerikte gün, ay, yıl veya herhangi bir tarih GEÇMEYECEK.
+                - Yapay zeka ile alakalı değil bilgisayarlarla alakalı şeyler yazabilirsin
+                - bilgisayar parçaları hakkında konuşabilirsin
+                - Sonuç SADECE aşağıdaki JSON formatında olacak, başka hiçbir açıklama yazmayacaksın:
+
+                {
+                    "title": "Yazı Başlığı",
+                    "content": "HTML formatında uzun blog içeriği...",
+                    "imageURL": "Geçerli resim URL'si"
+                }
+
+                SADECE JSON FORMATINDA VER MARKDOWN FORMATINDA VERME`,
+
+                `Sen, teknoloji ve yazılım konularında uzman bir blog yazarı gibi davran.
+                Teknoloji, yazılım, programlama veya bilgisayar donanımı hakkında ilgi çekici, bilgilendirici ve SEO uyumlu bir blog yazısı hazırla.
+
+                Kurallar:
+                - Bir adet "title" üret.
+                - Uzun, detaylı ve tamamen HTML etiketleriyle yazılmış bir "content" üret.
+                - Google görsellerden geçerli bir resim bul ve linkini "imageURL" değerine koy. (Unsplash KULLANMA.)
+                - Ürettiğin içerikte gün, ay, yıl veya herhangi bir tarih GEÇMEYECEK.
+                - Yapay zeka ile alakalı şeyler yazabilirsin
+                - bilgisayar parçaları hakkında konuşabilirsin
+                - Sonuç SADECE aşağıdaki JSON formatında olacak, başka hiçbir açıklama yazmayacaksın:
+
+                {
+                "title": "Yazı Başlığı",
+                "content": "HTML formatında uzun blog içeriği...",
+                "imageURL": "Geçerli resim URL'si"
+                }
+
+                SADECE JSON FORMATINDA VER MARKDOWN FORMATINDA VERME`,
+                `Sen, teknoloji ve yazılım konularında uzman bir blog yazarı gibi davran.
+                Teknoloji, yazılım, programlama veya bilgisayar donanımı hakkında ilgi çekici, bilgilendirici ve SEO uyumlu bir blog yazısı hazırla.
+
+                Kurallar:
+                - Bir adet "title" üret.
+                - Uzun, detaylı ve tamamen HTML etiketleriyle yazılmış bir "content" üret.
+                - Google görsellerden geçerli bir resim bul ve linkini "imageURL" değerine koy. (Unsplash KULLANMA.)
+                - Ürettiğin içerikte gün, ay, yıl veya herhangi bir tarih GEÇMEYECEK.
+                - Nasıl iyi bilgisayarcı olunur gibi şeyler yazabilirsin
+                - bilgisayar parçaları hakkında konuşabilirsin
+                - Sonuç SADECE aşağıdaki JSON formatında olacak, başka hiçbir açıklama yazmayacaksın:
+
+                {
+                "title": "Yazı Başlığı",
+                "content": "HTML formatında uzun blog içeriği...",
+                "imageURL": "Geçerli resim URL'si"
+                }
+
+                SADECE JSON FORMATINDA VER MARKDOWN FORMATINDA VERME`,
+                `Sen, teknoloji ve yazılım konularında uzman bir blog yazarı gibi davran.
+                Teknoloji, yazılım, programlama veya bilgisayar donanımı hakkında ilgi çekici, bilgilendirici ve SEO uyumlu bir blog yazısı hazırla.
+
+                Kurallar:
+                - Bir adet "title" üret.
+                - Uzun, detaylı ve tamamen HTML etiketleriyle yazılmış bir "content" üret.
+                - Google görsellerden geçerli bir resim bul ve linkini "imageURL" değerine koy. (Unsplash KULLANMA.)
+                - Ürettiğin içerikte gün, ay, yıl veya herhangi bir tarih GEÇMEYECEK.
+                - Nasıl iyi yazılımcı olunur gibi şeyler yazabilirsin
+                - bilgisayar parçaları hakkında konuşabilirsin
+                - Sonuç SADECE aşağıdaki JSON formatında olacak, başka hiçbir açıklama yazmayacaksın:
+
+                {
+                "title": "Yazı Başlığı",
+                "content": "HTML formatında uzun blog içeriği...",
+                "imageURL": "Geçerli resim URL'si"
+                }
+
+                SADECE JSON FORMATINDA VER MARKDOWN FORMATINDA VERME`,
+            ]
+
+            let random = Math.floor(Math.random() * subject.length) + 1;
+
+            return subject[random];
+        } catch (error) {
+            
+        }
     }
 }

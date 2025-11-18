@@ -29,6 +29,14 @@ class blogController {
             res.status(400).json({ message: error });
         }
     }
+    async getSubject(req:Request, res:Response) {
+        try {
+            const result = await blogService.getSubject();
+            res.json(result)
+        } catch (error) {
+            res.status(400).json({ message: error });
+        }
+    }
 
 };
 
