@@ -1,11 +1,11 @@
 <script>
-    import { PUBLIC_BACKEND_URL } from '$env/static/public';
+    import Seo from '$lib/Components/Seo.svelte';
 
     export let data;
 </script>
 
 
-
+<Seo title={data.blog.title} />
 <div class="h-screen  flex flex-col items-center selection:bg-hit">
     <div class="flex justify-center w-250 h-100">
     </div>

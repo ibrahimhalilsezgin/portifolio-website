@@ -41,7 +41,7 @@
         İbrahim Halil Sezgin
     </div>
     <div class="hidden md:flex gap-8 w-1/3 justify-center text-xl text-white/70">
-        <div on:click={(e) => scrollToSection(e,"home")} class="cursor-pointer" aria-label="nav-link" >Anasayfa</div>
+        <div on:click={(e) => scrollToSection(e,"/home")} class="cursor-pointer" aria-label="nav-link" >Anasayfa</div>
         <div on:click={(e) => scrollToSection(e,"services")} class="cursor-pointer" aria-label="nav-link">Hizmetler</div>
         <div on:click={(e) => scrollToSection(e,"aboutme")} class="cursor-pointer" aria-label="nav-link">Hakkımda</div>
         <div on:click={(e) => scrollToSection(e,"contact")} class="cursor-pointer" aria-label="nav-link">İletişim</div>

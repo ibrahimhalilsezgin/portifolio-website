@@ -10,6 +10,7 @@
   import { PUBLIC_BACKEND_URL } from "$env/static/public";
   import { getCookie, setCookie } from "../utils/cookie.util";
     import { Cookie } from "lucide-svelte";
+    import Seo from "$lib/Components/Seo.svelte";
 
 		
   export let data;
@@ -58,7 +59,7 @@
 
 </script>
 
-
+<Seo title="Anasayfa"/>
 {#if selectedProject}
   
   <div class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedProject = ""}>
