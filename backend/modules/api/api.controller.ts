@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import apiService from "./api.service";
+import { authenticateToken } from "../../middleware/authentication";
 class apiController {
 
     async getAllInfo(req:Request, res:Response) {
@@ -60,6 +61,17 @@ class apiController {
             res.status(400).json({ message: error });
         };
     };
+    async postData(req:Request, res:Response, next:NextFunction) {
+        
+        
+        try {
+            const result = await apiService.getData();
+            res.send(result);
+        } catch(error:any) {
+            console.log(error)
+            res.status(400).json({ message: error });
+        };
+    }
 };
 
 

@@ -17,7 +17,7 @@ export const connectDB = async () => {
         username:'DefaultUser',
         password: hashedDefaultPassword
     }).save();
-
+    
     new CollectedData({
         id:'default'
     }).save()

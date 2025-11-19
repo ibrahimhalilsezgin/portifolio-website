@@ -7,8 +7,8 @@
 </script>
 
 
-<div class="flex h-screen bg-adminbg">
-    <div class="w-2/12 h-screen bg-adminbg-3 flex flex-col items-center p-3">
+<div class="flex h-full bg-adminbg">
+    <div class="w-2/12 h-full bg-adminbg-3 flex flex-col items-center p-3">
         <div class="text-center text-3xl">
             Admin Panel
         </div>
@@ -16,52 +16,52 @@
         
         
         <div class="w-full mt-10 h-3/4 flex flex-col gap-4">
-            <div class="bg-[#2E5979] text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/')}>
+            <button class="bg-[#2E5979] text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/')}>
                 <LayoutDashboard size={27} />
                 Dashboard
-            </div>
+            </button>
             
             
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/skills')}>
+            <button class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/skills')}>
                 <Code size={27} />
                 Skills
-            </div>
+            </button>
             
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/projects')}>
+            <button class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/projects')}>
                 <Palette size={27} />
                 Projects
-            </div>
+            </button>
             
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/certificates')}>
+            <button class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/certificates')}>
                 <File size={27} />
                 Certificates
-            </div>
+            </button>
             
             
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/aboutme')}>
+            <button class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/aboutme')}>
                 <User size={27} />
                 About Me
-            </div>
+            </button>
             
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/contact')}>
+            <button class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/contact')}>
                 <Inbox size={27} />
                 Contact Inquiries
-            </div>
+            </button>
             <hr>
-            <div class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/blogs')}>
+            <button class="text-lg flex items-center rounded-xl p-3 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/blogs')}>
                 <Inbox size={27} />
                 Blogs
-            </div>
+            </button>
             
         </div>
         <hr class="text-black">
         <div class="w-full pt-4 flex flex-col gap-4 pl-4">
             
             
-            <div class="text-lg flex items-center rounded-lg p-2 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/settings')}>
+            <button class="text-lg flex items-center rounded-lg p-2 gap-4 hover:bg-[#2E5979] cursor-pointer" onclick={() => goto('/admin/settings')}>
                 <Settings size={35}/>
                 Settings
-            </div>
+            </button>
             <div class="flex items-center gap-5">
                 <img src="https://dummyimage.com/64x64/000/fff" alt="" class="rounded-full">
                 <div class="flex flex-col">

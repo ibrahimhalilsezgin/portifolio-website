@@ -1,7 +1,31 @@
 <script lang="ts">
+    import { PUBLIC_BACKEND_URL } from "$env/static/public";
     import axios from "axios";
     import { CirclePlus, Search } from "lucide-svelte"
-    const {data} = $props();
+    import { onMount } from "svelte";
+    import { MapLibre, NavigationControl, ScaleControl, GlobeControl } from 'svelte-maplibre-gl';
+    import { getCookie } from "../../utils/cookie.util";
+    
+
+    let lng = 34, lat = 39
+    async function getIP(ip:string) {
+        const inf = await fetch(`https://ipapi.co/${ip}/json/`).then(r => r.json());
+
+        lng = inf.longitude
+        lat = inf.latitude
+    }
+    let ips:any;
+    onMount(async () => {
+        const response = await axios({
+            url:PUBLIC_BACKEND_URL + '/api/data',
+            method:'get',
+            headers:{
+                Authorization: 'Bearer ' + getCookie('token')
+            }
+        });
+        ips = response.data.ip
+    })
+    $: console.log(ips)
 </script>
 
 
@@ -66,63 +90,27 @@
                 </div>
             </div>
         </div>
-        
         <div class="bg-adminbg-2 h-min pl-4 w-full mt-4 flex flex-col border-adminbg-3 border rounded-2xl">
             
-            <div class="flex p-2 border-b border-b-adminbg-3">
-                <div class="w-2/3 text-white/60">Sender</div>
-                <div class="w-2/3 text-white/60">Subject</div>
-                <div class="w-1/3 text-white/60">Date</div>
-                <div class="w-1/3"></div>
-            </div>
-            <div>
-                <div class="flex p-2 border-b border-b-adminbg-3">
-                    <div class="w-2/3">Jane Cooper</div>
-                    <div class="w-2/3 text-white/60">Project Collaboration Propsal</div>
-                    <div class="w-1/3 text-white/60">Oct 25, 2023</div>
-                    <div class="w-1/3 text-blue-600 flex justify-end pr-4"><a href="#a">View</a></div>
-                </div>
-            </div>
-            <div>
-                <div class="flex p-2 border-b border-b-adminbg-3">
-                    <div class="w-2/3">Jane Cooper</div>
-                    <div class="w-2/3 text-white/60">Project Collaboration Propsal</div>
-                    <div class="w-1/3 text-white/60">Oct 25, 2023</div>
-                    <div class="w-1/3 text-blue-600 flex justify-end pr-4"><a href="#a">View</a></div>
-                </div>
-            </div>
-            <div>
-                <div class="flex p-2 border-b border-b-adminbg-3">
-                    <div class="w-2/3">Jane Cooper</div>
-                    <div class="w-2/3 text-white/60">Project Collaboration Propsal</div>
-                    <div class="w-1/3 text-white/60">Oct 25, 2023</div>
-                    <div class="w-1/3 text-blue-600 flex justify-end pr-4"><a href="#a">View</a></div>
-                </div>
-            </div>
-            <div>
-                <div class="flex p-2 border-b border-b-adminbg-3">
-                    <div class="w-2/3">Jane Cooper</div>
-                    <div class="w-2/3 text-white/60">Project Collaboration Propsal</div>
-                    <div class="w-1/3 text-white/60">Oct 25, 2023</div>
-                    <div class="w-1/3 text-blue-600 flex justify-end pr-4"><a href="#a">View</a></div>
-                </div>
-            </div>
-            <div>
-                <div class="flex p-2 border-b border-b-adminbg-3">
-                    <div class="w-2/3">Jane Cooper</div>
-                    <div class="w-2/3 text-white/60">Project Collaboration Propsal</div>
-                    <div class="w-1/3 text-white/60">Oct 25, 2023</div>
-                    <div class="w-1/3 text-blue-600 flex justify-end pr-4"><a href="#a">View</a></div>
-                </div>
-            </div>
-            <div>
-                <div class="flex p-2 border-b border-b-adminbg-3">
-                    <div class="w-2/3"></div>
-                    <div class="w-2/3 text-white/60">Project Collaboration Propsal</div>
-                    <div class="w-1/3 text-white/60">Oct 25, 2023</div>
-                    <div class="w-1/3 text-blue-600 flex justify-end pr-4"><a href="#a">View</a></div>
-                </div>
-            </div>
+            <MapLibre
+                class="h-[55vh] min-h-[300px]"
+                style="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
+                zoom={5.2}
+                center={{ lng: lng, lat: lat }}
+            >
+                <NavigationControl />
+                <ScaleControl />
+                <GlobeControl />
+            </MapLibre>
+        </div>
+        <div class="bg-adminbg-2 pl-4 w-full mt-4 flex flex-col border-adminbg-3 border rounded-2xl overflow-y-scroll max-h-120">
+        
+            {#each ips as ip}
+            <button class="flex p-2 border-b border-b-adminbg-3 cursor-pointer" on:click={() => getIP(ip)}>
+                {ip}
+            </button>
+            {/each}
+
         </div>
     </div>
 </div>

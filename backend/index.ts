@@ -52,7 +52,7 @@ app.post('/collect', async (req, res) => {
         req.headers['x-forwarded-for'] ||
         req.socket.remoteAddress;
         const data = await CollectedData.findOne({id:'default'});
-
+        console.log(data?.ip.includes(ip))
         if(data.ip.includes(ip)) return;
         await CollectedData.findOneAndUpdate({id:'default'}, {
             $push: {

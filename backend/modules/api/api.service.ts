@@ -3,6 +3,7 @@ import Projects from "../../db/models/Projects";
 import Certificates from "../../db/models/Certificates";
 import About from "../../db/models/About";
 import Blog from "../../db/models/Blog";
+import Data from "../../db/models/CollectedData";
 
 export default {
     async getAllInfo() {
@@ -46,6 +47,10 @@ export default {
         const blog = await Blog.findOne({ id });
         if(!blog) throw Error('Blog Bulunamadı.');
         return blog;
+    },
+    async getData() {
+        const data = await Data.findOne({ id:'default' });
+        return data;
     }
     
 }
