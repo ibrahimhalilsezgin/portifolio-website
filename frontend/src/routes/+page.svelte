@@ -14,7 +14,7 @@
 
 		
   export let data;
-  let loading = false;
+  let loading = true;
 
   let selectedProject = "";
   let selectedCertificate = "";
