@@ -49,12 +49,10 @@
           url:PUBLIC_BACKEND_URL + '/collect',
           method:'post'
         })
-        console.log(response)
+        console.log(response.data)
     }
 
-    setTimeout(() => {
       loading = false;
-    },2000)
   });
 
 </script>
