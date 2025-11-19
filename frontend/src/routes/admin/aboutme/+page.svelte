@@ -75,21 +75,21 @@
       </BlurFade>
 
       <div class="pt-8 flex gap-4 text-white/60">
-        <a href="#" aria-label="links"
+        <div aria-label="links"
           class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
         >
           <i class="fab fa-instagram text-2xl md:text-3xl"></i>
-      </a>
-        <a href="#" aria-label="links"
+      </div>
+        <div aria-label="links"
           class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
         >
           <i class="fab fa-linkedin text-2xl md:text-3xl"></i>
-      </a>
-        <a href="#" aria-label="links"
+      </div>
+        <div aria-label="links"
           class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
         >
           <i class="fab fa-github text-2xl md:text-3xl"></i>
-      </a>
+      </div>
 
       </div>
       <div class="flex gap-7 pt-8">

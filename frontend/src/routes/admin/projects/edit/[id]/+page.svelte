@@ -44,9 +44,9 @@
     <div class="flex flex-col h-4/5 w-3/5 rounded-4xl bg-adminbg-2 border-adminbg-3 border shadow-2xl shadow-black/10 items-center jusfiy-center">
         
         
-        <div class="w-full mt-7 hover:text-yellow-400 cursor-pointer" on:click={() => goto('/admin/projects')}>
+        <button class="w-full mt-7 hover:text-yellow-400 cursor-pointer" on:click={() => goto('/admin/projects')}>
             <ArrowLeftIcon size={60}/>
-        </div>
+        </button>
         <h1 class="md:text-4xl pt-3">Update Project</h1>
         <h2>You're Editing Now <span class="text-pink-500 text-xl flex items-center flex-col">{data.project.title}</span></h2>
         <div class="h-full w-full flex flex-col pt-20 gap-1 jusfiy-center items-center">

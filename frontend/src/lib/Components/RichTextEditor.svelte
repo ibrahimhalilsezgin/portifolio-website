@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte';
   const dispatch = createEventDispatcher();
 
@@ -7,8 +7,8 @@
   export let placeholder = 'Yazmaya başla...';
   export let value = '';
 
-  let editor;
-  let inputTimeout;
+  let editor:any;
+  let inputTimeout:any;
 
   // Caret konumuna BR ekler
   function insertBRAtCaret() {
@@ -54,7 +54,7 @@
   }
 
   // Toolbar komutları
-  function exec(cmd) {
+  function exec(cmd:any) {
     document.execCommand(cmd, false, null);
     if (editor) {
       value = editor.innerHTML;
@@ -64,7 +64,7 @@
   }
 
   // Yapıştırma - sadece düz metin
-  function onPaste(e) {
+  function onPaste(e:any) {
     e.preventDefault();
     
     const text = e.clipboardData?.getData('text') || '';
@@ -85,7 +85,7 @@
   }
 
   // Enter tuşu davranışı
-  function onKeyDown(e) {
+  function onKeyDown(e:any) {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       insertBRAtCaret();
@@ -134,7 +134,7 @@
   </div>
 
   <div
-    class="overflow-y-scroll max-h-70 min-h-[150px] w-full border-2 border-gray-300 p-4 rounded-lg outline-none whitespace-pre-wrap break-words leading-relaxed transition-all duration-200 bg-transparent focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)] {!value ? 'empty' : ''}"
+    class="overflow-y-scroll max-h-70 min-h-[150px] w-full border-2 border-gray-300 p-4 rounded-lg outline-none whitespace-pre-wrap wrap-break-word leading-relaxed transition-all duration-200 bg-transparent focus:border-blue-500 focus:shadow-[0_0_0_3px_rgba(59,130,246,0.1)] {!value ? 'empty' : ''}"
     contenteditable="true"
     bind:this={editor}
     on:input={onInput}
@@ -144,7 +144,8 @@
     role="textbox"
     aria-multiline="true"
     tabindex="0"
-  />
+  ></div>
+  
 </div>
 
 <style>

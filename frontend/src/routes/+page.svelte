@@ -9,8 +9,8 @@
   import axios from "axios";
   import { PUBLIC_BACKEND_URL } from "$env/static/public";
   import { getCookie, setCookie } from "../utils/cookie.util";
-    import { Cookie } from "lucide-svelte";
-    import Seo from "$lib/Components/Seo.svelte";
+  import { Cookie, Facebook, GithubIcon, Instagram, LinkedinIcon, Twitter } from "lucide-svelte";
+  import Seo from "$lib/Components/Seo.svelte";
 
 		
   export let data;
@@ -35,13 +35,13 @@
   }
   let cookieAccess:string;
   async function acceptCookie() {
-      setCookie('allowCollectCookies', true)
+      setCookie('allowCollectCookies', 'true')
       cookieAccess = 'true'
   }
   onMount(async () => {
-    cookieAccess = getCookie('allowCollectCookies');
+    cookieAccess = getCookie('allowCollectCookies') as string;
     if(!cookieAccess) {
-        setCookie('allowCollectCookies', false)
+        setCookie('allowCollectCookies', 'false')
     }
 
     if(cookieAccess = 'true') {
@@ -62,23 +62,23 @@
 <Seo title="Anasayfa"/>
 {#if selectedProject}
   
-  <div class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedProject = ""}>
+  <button class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedProject = ""}>
     <div class=" z-50">
         <img src="{selectedProject}" alt="" class="w-300 z-50 aspect-video">
         <div class="items-center flex justify-center text-2xl">
         </div>
     </div>
-  </div>
+  </button>
 {/if}
 {#if selectedCertificate}
   
-  <div class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedCertificate = ""}>
+  <button class="fixed h-screen w-screen bg-black/80 z-40 flex justify-center items-center bottom-0 top-0 left-0 right-0" on:click={() => selectedCertificate = ""}>
     <div class=" z-50">
         <img src="{selectedCertificate}" alt="" class="w-300 z-50">
         <div class="items-center flex justify-center text-2xl">
         </div>
     </div>
-  </div>
+  </button>
 {/if}
 {#if cookieAccess == 'false'}
   <div class="hidden md:flex fixed items-center h-15 gap-2 bottom-0 bg-[#424242] w-full z-50" transition:slide>
@@ -111,7 +111,7 @@
           <a href={data.api.about.github} aria-label="links"
           class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
           >
-          <i class="fab fa-github text-2xl md:text-3xl"></i>
+          <GithubIcon/>
         </a>
         {/if}
         
@@ -119,7 +119,7 @@
         <a href={data.api.about.linkedin} aria-label="links"
         class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
         >
-        <i class="fab fa-linkedin text-2xl md:text-3xl"></i>
+        <LinkedinIcon />
       </a>
       {/if}
       
@@ -127,7 +127,7 @@
       <a href={data.api.about.instagram} aria-label="links"
       class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
       >
-      <i class="fab fa-instagram text-2xl md:text-3xl"></i>
+      <Instagram />
     </a>
     {/if}
     
@@ -135,7 +135,7 @@
     <a href={data.api.about.twitter} aria-label="links"
     class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
     >
-    <i class="fab fa-x-twitter text-2xl md:text-3xl"></i>
+    <Twitter />
   </a>
   {/if}
   
@@ -143,7 +143,7 @@
   <a href={data.api.about.facebook} aria-label="links"
   class="border h-12 w-12 rounded-full flex justify-center items-center cursor-pointer hover:text-hit"
   >
-  <i class="fab fa-facebook text-2xl md:text-3xl"></i>
+  <Facebook />
 </a>
 {/if}
 
@@ -260,12 +260,12 @@ class="md:flex md:items-center bg-black/40 w-80 md:w-150 text-nowrap rounded-2xl
     <div class="grid md:grid-cols-3 mt-15 gap-6 p-15">
       
       {#each data.api.projects as project}
-        <div class="bg-[#252525]  h-min rounded-xl cursor-pointer " on:click={() => selectedProject = `${PUBLIC_BACKEND_URL}/projects/${project.title}.jpeg`}>
+        <button class="bg-[#252525]  h-min rounded-xl cursor-pointer " on:click={() => selectedProject = `${PUBLIC_BACKEND_URL}/projects/${project.title}.jpeg`}>
           <img src={`${PUBLIC_BACKEND_URL}/projects/${project.title}.jpeg`} class="w-full max-h-69 aspect-video rounded-t-2xl" alt="">
           <div class="text-center text-white/60 text-lg pt-2 font-semibold">
             {project.title}
           </div>
-        </div>
+        </button>
       {/each}
       
       </div>
@@ -281,12 +281,12 @@ class="md:flex md:items-center bg-black/40 w-80 md:w-150 text-nowrap rounded-2xl
     <div class="grid md:grid-cols-3 gap-6 p-15">
       
       {#each data.api.certificates as certification}
-        <div class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedCertificate = `${PUBLIC_BACKEND_URL}/certificates/${certification.title}.jpeg`}}>
+        <button class="bg-[#252525]  h-min rounded-lg cursor-pointer" on:click={() => {selectedCertificate = `${PUBLIC_BACKEND_URL}/certificates/${certification.title}.jpeg`}}>
           <img src={`${PUBLIC_BACKEND_URL}/certificates/${certification.title}.jpeg`} class="w-full rounded-t-2xl" alt="">
           <div class="text-center text-white/60 text-lg pt-2 font-semibold">
             {certification.title}
           </div>
-        </div>
+        </button>
       {/each}
            
     </div>

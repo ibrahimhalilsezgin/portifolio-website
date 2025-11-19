@@ -52,9 +52,9 @@
     <div class="flex flex-col h-4/5 w-3/5 rounded-4xl bg-adminbg-2 border-adminbg-3 border shadow-2xl shadow-black/10 items-center jusfiy-center">
         
         
-        <div class="w-full mt-7 hover:text-yellow-400 cursor-pointer" on:click={() => goto('/admin/projects')}>
+        <button class="w-full mt-7 hover:text-yellow-400 cursor-pointer" on:click={() => goto('/admin/projects')}>
             <ArrowLeftIcon size={60}/>
-        </div>
+        </button>
         <h1 class="md:text-4xl pt-3">Create Project</h1>
         <div class="h-full w-full flex flex-col pt-20 gap-1 jusfiy-center items-center">
             <label for="title" class="text-2xl font-semibold">Title: </label>

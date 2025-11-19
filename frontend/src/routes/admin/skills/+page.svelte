@@ -123,7 +123,7 @@
     <div class="flex flex-col rounded-lg h-2/3 w-full items-center pr-100 z-20">
         <div class="bg-adminbg flex-col flex p-24 rounded-4xl">
             <div class="justify-end flex">
-                 <div class="flex justify-end items-center w-min" on:click={closeCreateNewSkillModal}><X size={30} color="red" class="cursor-pointer" /></div>
+                 <button class="flex justify-end items-center w-min" on:click={closeCreateNewSkillModal}><X size={30} color="red" class="cursor-pointer" /></button>
             </div>
             <h1 class="text-4xl">New Skill</h1>
             <label for="skillName">Skill Name</label>
