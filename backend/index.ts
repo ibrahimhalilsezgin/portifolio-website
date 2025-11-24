@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import morgan from "morgan";
 import path from "path";
+import { createClient } from 'redis';
+
 import "dotenv/config";
 
 
@@ -11,8 +13,12 @@ const PORT = process.env.PORT || 3000;
 
 
 import {connectDB} from "./db/connect"
-
+import { connectRedis } from "./cache/redis";
 connectDB();
+connectRedis();
+
+
+
 app.use(cors({
     origin:['http://localhost:5173','http://localhost:4173','https://ibo.rocks'],
     methods:['GET', 'POST']
@@ -30,6 +36,7 @@ import aboutRouter from "./modules/aboutme/about.router";
 import contactRouter from "./modules/contact/contact.router";
 import blogRouter from "./modules/blog/blog.router";
 import CollectedData from "./db/models/CollectedData";
+import redis from "./cache/redis";
 
 app.use('/auth/', userRouter);
 app.use('/settings/', settingsRouter);

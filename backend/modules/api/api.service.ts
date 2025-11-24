@@ -4,6 +4,7 @@ import Certificates from "../../db/models/Certificates";
 import About from "../../db/models/About";
 import Blog from "../../db/models/Blog";
 import Data from "../../db/models/CollectedData";
+import redis from "../../cache/redis";
 
 export default {
     async getAllInfo() {
@@ -11,6 +12,15 @@ export default {
         const projects = await Projects.find({});
         const certificates = await Certificates.find({});
         const about = await About.findOne({id:'default'});
+
+        const cachedData = await redis.get(`allinfo`)
+        if(cachedData) {
+            console.log('redisten çekildi')
+            return JSON.parse(cachedData)
+        }
+        await redis.setEx(`allinfo`, 60 * 5, JSON.stringify({skills, projects, certificates, about}));
+
+
         return {
             skills: skills,
             projects: projects,
