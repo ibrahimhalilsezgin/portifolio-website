@@ -1,12 +1,12 @@
 import { createClient } from "redis";
 
-
+const redisSettings = JSON.parse(process.env.redisConnection)
 const redis = createClient({
-    username: 'default',
-    password: 'Rb5tXnnD7WyMZHrJbNRnm7381AEbykWg',
+    username: redisSettings.username,
+    password: redisSettings.password,
     socket: {
-        host: 'redis-10635.crce177.me-south-1-1.ec2.cloud.redislabs.com',
-        port: 10635
+        host: redisSettings.host,
+        port: redisSettings.port
     }
 });
 
