@@ -33,22 +33,12 @@
      })
   }
 
-<<<<<<< HEAD
   onMount(async () => {
     const response = await axios({
       url:PUBLIC_BACKEND_URL + '/collect',
       method:'post'
     })
 
-=======
-    if(cookieAccess = 'true') {
-        const response = await axios({
-          url:PUBLIC_BACKEND_URL + '/collect',
-          method:'post'
-        })
-        console.log(response.data)
-    }
->>>>>>> 8011e65ecd124875ccfac004ac081c4527390b14
 
       loading = false;
   });
