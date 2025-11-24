@@ -53,15 +53,14 @@ app.post('/collect', async (req, res) => {
         req.socket.remoteAddress;
         const data = await CollectedData.findOne({id:'default'});
         if(!data) return;
-        console.log(data.ip.includes(ip as string))
-        if(data.ip.includes(ip as string)) return;
+        if(data.ip.includes(ip as string)) return res.send('ok');
         await CollectedData.findOneAndUpdate({id:'default'}, {
             $push: {
                 ip: ip
             }
         });
         console.log(ip)
-        return res.status(200);
+        return res.status(200).send('ok');
 })
 
 app.listen(PORT, () => {
