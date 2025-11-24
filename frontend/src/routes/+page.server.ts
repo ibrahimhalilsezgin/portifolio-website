@@ -6,9 +6,6 @@ export const load = async ({ locals, cookies }) => {
         const response = await axios({
             method:'GET',
             url:PUBLIC_BACKEND_URL + '/api/AllInfo',
-            headers:{
-                Authorization: 'Bearer ' + cookies.get('token')
-            }
         });
 
         return {
